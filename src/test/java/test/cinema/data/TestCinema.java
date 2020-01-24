@@ -59,10 +59,10 @@ class TestCinema {
 				new Movie("Impitoyable", 1992, 130, clint),				//4
 				new Movie("American Sniper", 2014, 133, clint),			//5
 				new Movie("Very Bad Trip", 2009, 100, todd),			//6
-				new Movie("Avengers: Infinity War", 2018, 149),		//7
+				new Movie("Avengers: Infinity War", 2018, 149),			//7
 				new Movie("Avengers: Endgame", 2019, 181),				//8	
 				new Movie("Avengers", 2012, 143),						//9
-				new Movie("Captain Marvel", 2019, 123),				//10
+				new Movie("Captain Marvel", 2019, 123),					//10
 				new Movie("Avengers : L'ère d'Ultron", 2015, 141)		//11
 				);
 		movies.get(0).addActor(persons.get(0));
