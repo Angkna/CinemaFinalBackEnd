@@ -1,6 +1,8 @@
 package cinema.persistence.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -19,6 +21,7 @@ public class Person {
 	private Integer idPerson;
 	private String name;  		
 	private LocalDate birthdate;
+	private List<String> nationalities;
 	
 	
 	///constructeur
@@ -26,28 +29,22 @@ public class Person {
 	public Person() {
 		super();
 	}
-
 	
 	public Person(String name) {
 		this (name, null);
 	}
 
-
 	public Person(String name, LocalDate birthdate) {
 		this(null, name, birthdate);
 	}
-
-
-
 
 	public Person(Integer idPerson, String name, LocalDate birthdate) {
 		super();
 		this.idPerson = idPerson;
 		this.name = name;
 		this.birthdate = birthdate;
+		this.nationalities = new ArrayList<>();
 	}
-
-
 
 	//getter setters
 	@Id										
@@ -78,7 +75,15 @@ public class Person {
 
 	public void setBirthdate(LocalDate birthdate) {
 		this.birthdate = birthdate;
-	} 			 
+	} 	
+	
+	public List<String> getNationalities() {
+		return nationalities;
+	}
+
+	public void setNationalities(List<String> nationalities) {
+		this.nationalities = nationalities;
+	}
 	
 	
 
