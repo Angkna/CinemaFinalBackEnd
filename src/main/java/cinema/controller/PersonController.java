@@ -40,9 +40,17 @@ public class PersonController {
 	}
 	
 	
+	@GetMapping ("/byBirthDate")
+	@ResponseBody
+		public Set <Person> findByBirthdateYear(int year) {
+		return personService.getByBirthdateYear(year);
+	}
 	
-	
-	
+	@GetMapping ("/byPersonId")
+	@ResponseBody
+		public Set <Person> findByPersonId(int idPerson) {
+		return personService.getByPersonId(idPerson);
+	}
 	
 	///////////////////////////////////////////////////
 	

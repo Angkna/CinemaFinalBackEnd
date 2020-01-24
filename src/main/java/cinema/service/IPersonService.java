@@ -9,6 +9,8 @@ public interface IPersonService {
 
 	List<Person> getAllPersons();
 	Set<Person> getByNameContainingIgnoreCase(String name);
+	Set<Person> getByBirthdateYear(int year);
+	Set<Person> getByPersonId(int idPerson);
 
 
 }

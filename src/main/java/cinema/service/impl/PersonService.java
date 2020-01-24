@@ -29,6 +29,17 @@ public class PersonService implements IPersonService {
 		return personRepository.findByNameContainingIgnoreCase(name);
 	}
 
+	@Override
+	public Set<Person> getByBirthdateYear(int year) {
+			return personRepository.findByBirthdateYear(year);
+	}
+
+	@Override
+	public Set<Person> getByPersonId(int idPerson) {
+		// TODO Auto-generated method stub
+		return personRepository.findByBirthdateYear(idPerson);
+	}
+
 	
 	
 	
