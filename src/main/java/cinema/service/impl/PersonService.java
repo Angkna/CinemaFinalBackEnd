@@ -1,6 +1,7 @@
 package cinema.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class PersonService implements IPersonService {
 	}
 
 	@Override
-	public Set<Person> getByPersonId(int idPerson) {
+	public Optional<Person> getByPersonId(int idPerson) {
 		// TODO Auto-generated method stub
-		return personRepository.findByBirthdateYear(idPerson);
+		return personRepository.findById(idPerson);
 	}
 
 	

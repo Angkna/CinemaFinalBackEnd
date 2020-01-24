@@ -2,6 +2,7 @@ package cinema.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class PersonController {
 	
 	
 	
-	@GetMapping ("")
+	@GetMapping ("/getAllPersons")
 	public List<Person>getAllPersons() {
 		return personService.getAllPersons();
 		
@@ -48,7 +49,7 @@ public class PersonController {
 	
 	@GetMapping ("/byPersonId")
 	@ResponseBody
-		public Set <Person> findByPersonId(int idPerson) {
+		public Optional<Person> findByPersonId(int idPerson) {
 		return personService.getByPersonId(idPerson);
 	}
 	
