@@ -26,8 +26,8 @@ public class PersonController {
 
 	@PostMapping 
 	Person addPerson(Person person){
-		//TODO
-		return person;
+		
+		return personService.getAllPersons();
 	}
 
 
