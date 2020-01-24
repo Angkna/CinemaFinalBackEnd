@@ -22,7 +22,6 @@ public class MovieService implements IMovieService {
 
 	@Autowired
 	MovieRepository movieRepository;
-	
 	@Autowired
 	PersonRepository personRepository;
 
@@ -36,10 +35,10 @@ public class MovieService implements IMovieService {
 		return movieRepository.findByDirectorNameEndingWith(name);
 	}
 
-//	@Override
-//	public Set<Movie> movieByActorNameEndingWith(String name) {
-//		return movieRepository.findByActorNameEndingWith(name);
-//	}
+	@Override
+	public Set<Movie> getMovieByActorNameEndingWith(String name) {
+		return movieRepository.findByActorsNameEndingWith(name);
+	}
 
 	@Override
 	public Set<Movie> getMovieByActorsName(String name) {
@@ -72,9 +71,61 @@ public class MovieService implements IMovieService {
 	}
 
 	@Override
-	public Set<Movie> getByDirectorId(int idDirector) {
+	public Set<Movie> getMovieByDirectorId(int idDirector) {
 		  var directOpt =personRepository.findById(idDirector); 
 			return directOpt.map(d-> movieRepository.findByDirector(d))
 					.orElseGet( () -> Collections.emptySet());
+	}
+
+	@Override
+	public Movie addMovie(Movie movie) {
+		Movie movieSaved = movieRepository.save(movie);
+		movieRepository.flush();
+		return movieSaved;
+	}
+
+	@Override
+	public Optional<Movie> modifyMovie(Movie movie) {
+		var optMovie = movieRepository.findById(movie.getIdMovie());
+		optMovie.ifPresent(m ->  {
+				m.setTitle(movie.getTitle());
+				m.setYear(movie.getYear());
+				m.setDuration(movie.getDuration());
+				m.setDirector(movie.getDirector());
+		});	
+		movieRepository.flush();
+		return optMovie;
+	}
+
+	@Override
+	public Optional<Movie> addActor(int idActor, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		var actorOpt = personRepository.findById(idActor);
+		if (movieOpt.isPresent() && actorOpt.isPresent()) {
+			movieOpt.get().getActors().add(actorOpt.get());
+			movieRepository.flush();
+		}
+		return movieOpt;
+	}
+
+	@Override
+	public Optional<Movie> setDirector(int idDirector, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		var directorOpt = personRepository.findById(idDirector);
+		if (movieOpt.isPresent() && directorOpt.isPresent()) {
+			movieOpt.get().setDirector(directorOpt.get());
+			movieRepository.flush();
+		}
+		return movieOpt;
+	}
+
+	@Override
+	public Optional<Movie> deleteMovie(int idMovie) {
+		var movieToDelete = movieRepository.findById(idMovie);
+		movieToDelete.ifPresent(m -> {
+		movieRepository.delete(m);
+		movieRepository.flush();
+		});
+		return movieToDelete;
 	}	
 }

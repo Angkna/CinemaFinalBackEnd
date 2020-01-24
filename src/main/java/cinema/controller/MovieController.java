@@ -1,6 +1,5 @@
 package cinema.controller;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -18,11 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cinema.persistence.entity.Movie;
-import cinema.persistence.entity.Person;
-import cinema.persistence.repository.MovieRepository;
-import cinema.persistence.repository.PersonRepository;
 import cinema.service.IMovieService;
-import cinema.service.impl.MovieService;
 
 @RestController
 @RequestMapping("/api/movie")
@@ -76,7 +71,7 @@ public class MovieController {
 	@GetMapping("/byDirectorId")
 	 @ResponseBody
 	public Set<Movie> findByDirectorId(@RequestParam("d") int idDirector) {
-		return movieService.getByDirectorId(idDirector);		
+		return movieService.getMovieByDirectorId(idDirector);		
 	}
 
 	
@@ -99,78 +94,45 @@ public class MovieController {
 	////////////////////////Post//////////////////////////
 
 	
-//	@PostMapping
-//	@ResponseBody
-//	public Movie addMovie (@RequestBody Movie movie) {
-//		Movie movieSaved = movieRepository.save(movie);
-//		movieRepository.flush();
-//		return movieSaved;
-//	}
-//	
-//	////////////////////////Put/////////////////////////
-//	
-//	
-//	@PutMapping("/modify")
-//	@ResponseBody
-//	public Optional<Movie> modifyMovie (@RequestBody Movie movie) {
-//		//TODO : anywhere else	
-//		var optMovie = movieRepository.findById(movie.getIdMovie());
-//	
-//		optMovie.ifPresent(m ->  {
-//				m.setTitle(movie.getTitle());
-//				m.setYear(movie.getYear());
-//				m.setDuration(movie.getDuration());
-//				m.setDirector(movie.getDirector());
-//		});	
-//		movieRepository.flush();
-//		//
-//		return optMovie;
-//	}
-//	
-//	
-//	
-//	
-//	@PutMapping("/addActor") 			//post aurait marché
-//	public Optional<Movie> addActor (@RequestParam("a") int idActor,
-//						@RequestParam ("m") int idMovie) {
-//		//TODO : anywhere else 
-//		var movieOpt = movieRepository.findById(idMovie);
-//		var actorOpt = personRepository.findById(idActor);
-//		if (movieOpt.isPresent() && actorOpt.isPresent()) {
-//			movieOpt.get().getActors().add(actorOpt.get());
-//			movieRepository.flush();
-//		}
-//		return movieOpt;
-//	}
-//	
-//	@PutMapping("/setDirector")
-//	public Optional<Movie> setDirector (@RequestParam("d") int idDirector, 
-//						@RequestParam("m") int idMovie) {
-//		var movieOpt = movieRepository.findById(idMovie);
-//		var directorOpt = personRepository.findById(idDirector);
-//		if (movieOpt.isPresent() && directorOpt.isPresent()) {
-//			// movieOpt.get().getDirector().add(directorOpt.get());
-//			movieOpt.get().setDirector(directorOpt.get());
-//			movieRepository.flush();
-//		}
-//		return movieOpt;
-//	}
-//	
-//	
-//	////////////////////////Delete////////////////////////
-//	
-//	@DeleteMapping("/{id}")
-//	@ResponseBody
-//	public Optional<Movie> deleteMovie (@PathVariable ("id") int idMovie) {
-//		var movieToDelete = movieRepository.findById(idMovie);
-//		movieToDelete.ifPresent(m -> {
-//		movieRepository.delete(m);
-//		movieRepository.flush();
-//		});
-//		return movieToDelete;	
-//	}
-//	
-//	
+	@PostMapping
+	@ResponseBody
+	public Movie addMovie (@RequestBody Movie movie) {
+		return movieService.addMovie(movie);
+	}
+	
+	////////////////////////Put/////////////////////////
+	
+	
+	@PutMapping("/modify")
+	@ResponseBody
+	public Optional<Movie> modifyMovie (@RequestBody Movie movie) {
+		return movieService.modifyMovie(movie);
+	}
+	
+	
+	
+	
+	@PutMapping("/addActor") 			//post aurait marché
+	public Optional<Movie> addActor (@RequestParam("a") int idActor, @RequestParam ("m") int idMovie) {
+		return movieService.addActor(idActor, idMovie);
+	}
+	
+	@PutMapping("/setDirector")
+	public Optional<Movie> setDirector (@RequestParam("d") int idDirector, 
+						@RequestParam("m") int idMovie) {
+		return movieService.setDirector(idDirector, idMovie);
+	}
+	
+	
+	////////////////////////Delete////////////////////////
+	
+	@DeleteMapping("/{id}")
+	@ResponseBody
+	public Optional<Movie> deleteMovie (@PathVariable ("id") int idMovie) {
+		return movieService.deleteMovie(idMovie);	
+	}
+	
+	
 	
 }
 
