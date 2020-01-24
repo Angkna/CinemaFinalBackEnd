@@ -40,46 +40,44 @@ public class MovieController {
 		
 	}
 	
-//	@GetMapping("/{id}")
-//	@ResponseBody
-//	public Optional<Movie> movieById(@PathVariable("id")int idMovie) {
-//		return movieRepository.findById(idMovie);
-//	}
-//	
-//	
+	@GetMapping("/{id}")
+	@ResponseBody
+	public Optional<Movie> movieById(@PathVariable("id")int idMovie) {
+			return movieService.getMovieById(idMovie);
+	}
+	
+	
 	@GetMapping("/byTitle")
 	@ResponseBody
 	public Set<Movie> movieByTitle(@RequestParam("t") String Title) {
 		return movieService.getMovieByTitle(Title);
 	}
-//	
-//	@GetMapping("/byTitleAndYear")
-//	@ResponseBody
-//	public Set<Movie> movieByTitleAndYear(@RequestParam("t") String Title,
-//									@RequestParam("y") int Year) {
-//		return movieRepository.findByTitleAndYear(Title,Year);
-//	}
-//
-//	@GetMapping("/byYearBetween")
-//	@ResponseBody
-//	public Set<Movie> movieByYearBetween(@RequestParam("y1") int Year,
-//									@RequestParam("y2") int Year2) {
-//		return movieRepository.findByYearBetween(Year, Year2);
-//	}
+	
+	@GetMapping("/byTitleAndYear")
+	@ResponseBody
+	public Set<Movie> movieByTitleAndYear(@RequestParam("t") String Title,
+									@RequestParam("y") int Year) {
+		return movieService.getMovieByTitleAndYear(Title, Year);
+	}
+
+	@GetMapping("/byYearBetween")
+	@ResponseBody
+	public Set<Movie> movieByYearBetween(@RequestParam("y1") int Year,
+									@RequestParam("y2") int Year2) {
+		 return movieService.getMovieByYearBetween(Year, Year2);
+	}
 	
 	@GetMapping("/byDirector")
 	@ResponseBody
 	public Set<Movie> movieByDirector(@RequestParam("d") String name) {
 		return movieService.getMovieByDirector(name);
 	}
-//	
-//	@GetMapping("/byDirectorId")
-//	 @ResponseBody
-//	public Set<Movie> findByDirector(@RequestParam("d") int idDirector) {
-//	    var directOpt =personRepository.findById(idDirector); 
-//		return directOpt.map(d-> movieRepository.findByDirector(d))
-//				.orElseGet( () -> Collections.emptySet());    		 		
-//	}
+	
+	@GetMapping("/byDirectorId")
+	 @ResponseBody
+	public Set<Movie> findByDirectorId(@RequestParam("d") int idDirector) {
+		return movieService.getByDirectorId(idDirector);		
+	}
 
 	
 	@GetMapping("/byActor")
@@ -94,6 +92,9 @@ public class MovieController {
 		return movieService.getMovieByActorsIdPerson(idActor);				
 	}
 	
+	/**
+	 * Method: Post
+	 */
 	
 	////////////////////////Post//////////////////////////
 

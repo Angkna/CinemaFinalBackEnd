@@ -1,6 +1,8 @@
 package cinema.service.impl;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +55,26 @@ public class MovieService implements IMovieService {
 	public Set<Movie> getMovieByTitle(String Title) {
 		return movieRepository.findByTitle(Title);
 	}
-	
+
+	@Override
+	public Set<Movie> getMovieByTitleAndYear(String Title, int Year) {
+		return movieRepository.findByTitleAndYear(Title,Year);
+	}
+
+	@Override
+	public Set<Movie> getMovieByYearBetween(int Year, int Year2) {
+		return movieRepository.findByYearBetween(Year, Year2);
+	}
+
+	@Override
+	public Optional<Movie> getMovieById(int idMovie) {
+		return movieRepository.findById(idMovie);
+	}
+
+	@Override
+	public Set<Movie> getByDirectorId(int idDirector) {
+		  var directOpt =personRepository.findById(idDirector); 
+			return directOpt.map(d-> movieRepository.findByDirector(d))
+					.orElseGet( () -> Collections.emptySet());
+	}	
 }
