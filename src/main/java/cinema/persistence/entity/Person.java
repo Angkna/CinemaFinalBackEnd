@@ -22,6 +22,7 @@ public class Person {
 	private String name;  		
 	private LocalDate birthdate;
 	private List<String> nationalities;
+	private String biography;
 	
 	
 	///constructeur
@@ -44,6 +45,7 @@ public class Person {
 		this.name = name;
 		this.birthdate = birthdate;
 		this.nationalities = new ArrayList<>();
+		this.biography = "";
 	}
 
 	//getter setters
@@ -85,7 +87,13 @@ public class Person {
 		this.nationalities = nationalities;
 	}
 	
-	
+	public String getBiography() {
+		return biography;
+	}
+
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
 
 	//to string method
 	  @Override
