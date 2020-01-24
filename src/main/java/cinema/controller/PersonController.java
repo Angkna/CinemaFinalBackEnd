@@ -19,15 +19,16 @@ public class PersonController {
 	
 	@GetMapping
 	List<Person>getAllPersons() {
-		//TODO
-		return null;
+		return personService.getAllPersons();
+		
 	}
 	
 
 	@PostMapping 
 	Person addPerson(Person person){
+		//TODO
+				return null;
 		
-		return personService.getAllPersons();
 	}
 
 
