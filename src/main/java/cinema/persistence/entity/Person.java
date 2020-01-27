@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -82,9 +85,17 @@ public class Person {
 		this.birthdate = birthdate;
 	} 	
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToMany
+	@JoinTable(name="born",
+	joinColumns=
+	@JoinColumn(name="id_person"),
+	inverseJoinColumns=
+	@JoinColumn(name="id_nationalities")
+			)
 	public List<Nationality> getNationalities() {
 		return nationalities;
+		
+		
 	}
 
 	public void setNationalities(List<Nationality> nationalities) {

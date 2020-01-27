@@ -1,12 +1,14 @@
 package cinema.persistence.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "nationalities")
 public class Nationality {
 	private Integer id;
 	private String nationality;
@@ -14,6 +16,10 @@ public class Nationality {
 	public Nationality() {
 		super();
 	}
+	public Nationality(String nationality) {
+		this(null, nationality);
+	}
+	
 	
 	public Nationality(Integer id, String nationality) {
 		super();
@@ -22,7 +28,8 @@ public class Nationality {
 	}
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name= "id_nationality")
 	public Integer getId() {
 		return id;
 	}

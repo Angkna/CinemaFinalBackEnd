@@ -11,12 +11,14 @@ import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.matchers.Contains;
+import org.mockito.internal.matchers.Equals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import cinema.persistence.entity.Movie;
+import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.PersonRepository;
 
@@ -128,16 +130,39 @@ class TestPerson {
 	}
 	
 
-//	@Test
-//	void testbyPersonNationalities () {
-//		var person = new Person ("Bradley", LocalDate.of(1975,05,01));
-//		var nationalities = List.of("Australien");
-//		person.setNationalities(nationalities);
-//				
-//		entityManager.persist(person);
+	@Test
+	void testbyPersonNationalities () {
+		var Australie = new Nationality("Australie");
+		var France = new Nationality("France");
+		var Espagne = new Nationality("Espagne");
+		var nationalities = List.of(Australie, France, Espagne);
+		nationalities.forEach(entityManager::persist) ;
+				
+		var brad = new Person ("Bradley", LocalDate.of(1975,05,01));
+		var bob = new Person ("Bob");
+		var ana = new Person ("Ana");
+		
+		var nationalities1 = List.of(Australie);
+		var nationalities2 = List.of(France);
+		var nationalities3 = List.of(Espagne);
+		
+		brad.setNationalities(nationalities1);
+		bob.setNationalities(nationalities2);
+		ana.setNationalities(nationalities3);
+		entityManager.persist(brad);
+		entityManager.persist(bob);
+		entityManager.persist(ana);
+		
+		///when
+		var nationalityRead = repoPerson.findByNationalities(Australie);
+		System.out.println(nationalityRead);
+		
+//		assertTrue(nationalityRead.stream()
+//				.map(Nationality::getNationality)	
+//				.allMatch(n -> n.equals(Australie)));
+				
 	
-	
-//	}
+	}
 	
 	
 	
