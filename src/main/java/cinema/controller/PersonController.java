@@ -51,10 +51,9 @@ public class PersonController {
 	
 	///////////////////////////////////////////////////
 	
-	@PostMapping 
+	@PostMapping ("/addPerson")
 	Person addPerson(Person person){
-		return personService.addPerson(person);
-		
+		return personService.addPerson(person);	
 	}
 
 
