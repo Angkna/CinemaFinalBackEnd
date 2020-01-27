@@ -130,10 +130,13 @@ class TestPerson {
 
 //	@Test
 //	void testbyPersonNationalities () {
-//		var person = new Person ("Bradley", LocalDate.of(1975,05,01), null, "Australien");
+//		var person = new Person ("Bradley", LocalDate.of(1975,05,01));
+//		var nationalities = List.of("Australien");
+//		person.setNationalities(nationalities);
+//				
 //		entityManager.persist(person);
-//	
-//	
+	
+	
 //	}
 	
 	

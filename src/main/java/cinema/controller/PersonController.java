@@ -55,11 +55,11 @@ public class PersonController {
 		return personService.getByPersonId(idPerson);
 	}
 	
-	@GetMapping ("/byNationalities")
-	@ResponseBody
-		public Set<Person> findByNationalities(@PathVariable("n") String nationalities) {
-			return personService.getByNationalities(nationalities);
-	}
+//	@GetMapping ("/byNationalities")
+//	@ResponseBody
+//		public Set<Person> findByNationalities(@PathVariable("n") String nationalities) {
+//			return personService.getByNationalities(nationalities);
+//	}
 	
 	///////////////////////////////////////////////////
 	

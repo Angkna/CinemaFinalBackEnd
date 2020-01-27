@@ -47,10 +47,10 @@ public class PersonService implements IPersonService {
 		return null;
 	}
 
-	@Override
-	public Set<Person> getByNationalities(String nationalities) {
-		return personRepository.findByNationalities(nationalities);
-	}
+//	@Override
+//	public Set<Person> getByNationalities(String nationalities) {
+//		return personRepository.findByNationalities(nationalities);
+//	}
 	
 	
 	
