@@ -45,6 +45,10 @@ public class Movie {
 	public Movie(String title, Integer year, Integer duration) {
 		this(null, title, year, duration, null, null);
 	}
+	
+	public Movie(String title, Integer year, Integer duration, Double rating, Person director) {
+		this(null, title, year, duration, rating, director);
+	}
 
 	public Movie(String title, Integer year, Integer duration, Person director) {
 		this(null, title, year, duration, null, director);

@@ -4,25 +4,52 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Movie;
+import cinema.persistence.entity.Person;
 
 public interface IMovieService {
 	
-	List<Movie> getAllMovies() ;
-	Set<Movie> getMovieByDirector(String name);
-	Set<Movie> getMovieByActorsName(String name) ;
-	Set<Movie> getMovieByActorsIdPerson(int idActor) ;
-	Set<Movie> getMovieByTitle(String Title) ;
-	Set<Movie> getMovieByTitleAndYear(String Title,int Year) ;
-	Set<Movie> getMovieByYearBetween(int Year,int Year2) ;
-	Optional<Movie> getMovieById(int idMovie) ;
-	Set<Movie> getMovieByDirectorId(int idDirector) ;
-	Set<Movie> getMovieByActorNameEndingWith(String name);
+	//get
+	List<Movie> getAllMovies();
+	Optional<Movie> getMovieById(int idMovie);
 	
+	Set<Movie> getMovieByTitle(String title);
+	Set<Movie> getMovieByTitleContainingIgnoreCase(String title);
+	Set<Movie> getMovieByTitleAndYear(String title,int Year);
+	
+	Set<Movie> getMovieByYear(int year);
+	Set<Movie> getMovieByYearLessThan(int year);
+	Set<Movie> getMovieByYearGreaterThan(int year);
+	Set<Movie> getMovieByYearBetween(int year1,int year2);
+	Set<Movie> getMovieByYearAndTitleAndDuration(int year, String name, int duration);
+	
+	Set<Movie> getMovieByDurationGreaterThan(int duration);
+	Set<Movie> getMovieByDurationBetween(int duration1, int duration2);
+	Set<Movie> getMovieByDurationLessThanEqual(int duration);
+	
+	Set<Movie> getMovieByRatingGreaterThanEqual(double rating);
+	
+	Set<Movie> getMovieBySynopsisContaining(String recherche);
+	
+	Set<Movie> getMovieByAudiance(Audiance audiance);
+	
+	Set<Movie> getMovieByDirector(Person person);
+	Set<Movie> getMovieByDirectorName(String name);
+	Set<Movie> getMovieByDirectorNameEndingWith(String name);
+	Set<Movie> getMovieByDirectorId(int idDirector);
+	
+	Set<Movie> getMovieByActorsName(String name);
+	Set<Movie> getMovieByActorsIdPerson(int idActor);
+	Set<Movie> getMovieByActorsNameEndingWith(String name);
+	
+	
+	//post-put
 	Movie addMovie(Movie movie);
 	Optional<Movie> modifyMovie (Movie movie);
 	Optional<Movie> addActor (int idActor, int idMovie);
 	Optional<Movie> setDirector (int idDirector, int idMovie);
 	
+	//delete
 	Optional<Movie> deleteMovie (int idMovie);
 }
