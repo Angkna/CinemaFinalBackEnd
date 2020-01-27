@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
 import cinema.service.IPersonService;
 
@@ -55,11 +55,11 @@ public class PersonController {
 		return personService.getByPersonId(idPerson);
 	}
 	
-//	@GetMapping ("/byNationalities")
-//	@ResponseBody
-//		public Set<Person> findByNationalities(@PathVariable("n") String nationalities) {
-//			return personService.getByNationalities(nationalities);
-//	}
+	@GetMapping ("/byNationalities")
+	@ResponseBody
+		public Set<Person> findByNationalities(Nationality nationalities) {
+			return personService.getByNationality(nationalities);
+	}
 	
 	///////////////////////////////////////////////////
 	

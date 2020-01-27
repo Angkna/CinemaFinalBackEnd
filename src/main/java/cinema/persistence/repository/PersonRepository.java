@@ -1,10 +1,12 @@
 package cinema.persistence.repository;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Integer> {
@@ -20,9 +22,11 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 	Set <Person> findByBirthdateYear(int year);
 	
 	//Nationality
-	//Set<Person> findByNationalities(String nationality);
+	Set<Person> findByNationalities(Nationality nationalities);
 
-	//TODO for strong develp
+	
+	
+	//TODO for strong people
 //	@Query"select p from Person p where extract (year from p.birthdate) = ?
 //	Set<Person> findByYearBetween(int year1, int year2)
 

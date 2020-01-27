@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.PersonRepository;
 import cinema.service.IPersonService;
@@ -47,10 +48,11 @@ public class PersonService implements IPersonService {
 		return null;
 	}
 
-//	@Override
-//	public Set<Person> getByNationalities(String nationalities) {
-//		return personRepository.findByNationalities(nationalities);
-//	}
+	@Override
+	public Set<Person> getByNationality(Nationality nationalities) {
+		return personRepository.findByNationalities(nationalities);
+	}
+	
 	
 	
 	

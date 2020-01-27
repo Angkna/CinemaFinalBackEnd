@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
 
 public interface IPersonService {
@@ -13,6 +14,6 @@ public interface IPersonService {
 	Set<Person> getByBirthdateYear(int year);
 	Optional<Person> getByPersonId(int idPerson);
 	Person addPerson(Person person);
-	//Set<Person> getByNationalities(String nationalities);
+	Set<Person> getByNationality(Nationality nationalities);
 
 }
