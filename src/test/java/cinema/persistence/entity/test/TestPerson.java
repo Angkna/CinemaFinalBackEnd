@@ -48,4 +48,34 @@ class TestPerson {
 //		System.out.println(dataRead);		
 	}
 
+	@Test
+	void testPersonNamePartial () {
+		Person person = new Person ("Bradley" );
+		repoPerson.save(person);
+		var name = person.getName();
+		System.out.println("name person : " + name);
+		
+	}
+	
+//	@Test
+//	void testPersonByBirthdateYear () {
+//		List<Person> data = List.of(
+//					new Person ("Bradley", LocalDate.of(1975,05,01)),
+//					new Person ("Bob", LocalDate.of(1992,06,29))
+//					);
+//		data.forEach(entityManager::persist);
+//		
+//		//when
+//		var year = 1975;
+//		var dateRead = repoPerson.findByBirthdateYear(year);
+//		System.out.println(dataRead);
+//		
+////		var name = person.getBirthdate();
+////		System.out.println("person by birthdate  : "+ name);
+//	}
+
+//	}
+	
+	
+	
 }

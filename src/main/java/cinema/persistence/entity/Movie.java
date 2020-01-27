@@ -28,7 +28,7 @@ public class Movie {
 	private Integer duration; 		//pour les champs NON obligatoire on passe par le objet de int :Integer
 	private List<String> genres;
 	private Double rating; 
-	private String sysnopsis;
+	private String synopsis;
 	private Audiance audiance;
 	private Person director;
 	private List<Person> actors;
@@ -56,9 +56,9 @@ public class Movie {
 		this.title = title;
 		this.year = year;
 		this.duration = duration;
-		this.genres = new ArrayList<String>();
+		//this.genres = new ArrayList<String>();
 		this.rating = rating;
-		this.sysnopsis = "";
+		this.synopsis = "";
 		this.audiance = null;
 		this.director = director;
 		this.actors = new ArrayList<Person>();
@@ -103,13 +103,13 @@ public class Movie {
 		this.duration = duration;
 	}
 
-	public List<String> getGenres() {
-		return genres;
-	}
-
-	public void setGenres(List<String> genres) {
-		this.genres = genres;
-	}
+//	public List<String> getGenres() {
+//		return genres;
+//	}
+//
+//	public void setGenres(List<String> genres) {
+//		this.genres = genres;
+//	}
 
 	public Double getRating() {
 		return rating;
@@ -120,11 +120,11 @@ public class Movie {
 	}
 	
 	public String getSysnopsis() {
-		return sysnopsis;
+		return synopsis;
 	}
 
 	public void setSysnopsis(String sysnopsis) {
-		this.sysnopsis = sysnopsis;
+		this.synopsis = sysnopsis;
 	}
 
 	public Audiance getAudiance() {
