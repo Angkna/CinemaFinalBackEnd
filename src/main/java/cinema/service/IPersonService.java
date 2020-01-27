@@ -13,6 +13,6 @@ public interface IPersonService {
 	Set<Person> getByBirthdateYear(int year);
 	Optional<Person> getByPersonId(int idPerson);
 	Person addPerson(Person person);
-
+	Set<Person> getByNationalities(String nationalities);
 
 }

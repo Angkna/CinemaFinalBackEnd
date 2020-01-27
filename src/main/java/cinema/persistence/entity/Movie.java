@@ -119,12 +119,12 @@ public class Movie {
 		this.rating = rating;
 	}
 	
-	public String getSysnopsis() {
+	public String getSynopsis() {
 		return synopsis;
 	}
 
-	public void setSysnopsis(String sysnopsis) {
-		this.synopsis = sysnopsis;
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
 	}
 
 	public Audiance getAudiance() {

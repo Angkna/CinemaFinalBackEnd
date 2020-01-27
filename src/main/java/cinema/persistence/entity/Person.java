@@ -21,7 +21,7 @@ public class Person {
 	private Integer idPerson;
 	private String name;  		
 	private LocalDate birthdate;
-	//private List<String> nationalities;
+	private List<String> nationalities;
 	private String biography;
 	
 	
@@ -44,7 +44,7 @@ public class Person {
 		this.idPerson = idPerson;
 		this.name = name;
 		this.birthdate = birthdate;
-		//this.nationalities = new ArrayList<>();
+		this.nationalities = new ArrayList<>();
 		this.biography = "";
 	}
 

@@ -1,13 +1,16 @@
 package cinema.persistence.entity.test;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Contains;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -23,6 +26,9 @@ class TestPerson {
 
 	 @Autowired
 	 PersonRepository repoPerson;
+	 
+	 @Autowired
+	EntityManager entityManager; 
 	
 	@Test
 	void testPersonSaven() {
@@ -33,49 +39,109 @@ class TestPerson {
 		repoPerson.save(person);
 		//then
 		System.out.println("personne créée : " + person);
-		
-//		List<Person> data = List.of(
-//				new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28)),
-//				new Person("Gerard Darmond", LocalDate.of(1948, 02, 29)),
-//				new Person("Todd Phillips")
-//				);
-//		data.forEach(EntityManager::persist);
-////		var name = 1994;
-//		String title = "Le Roi Lion";
-//		var duration = 166;
-//		var dataRead = repoMovie.findByYearAndTitleAndDuration(year, title, duration);
-//						
-//		System.out.println(dataRead);		
 	}
 
+	
 	@Test
-	void testPersonNamePartial () {
-		Person person = new Person ("Bradley" );
-		repoPerson.save(person);
-		var name = person.getName();
-		System.out.println("name person : " + name);
+	void testPersonName () {
+		List<Person> data = List.of(
+				new Person ("Bradley Cooper", LocalDate.of(1975,05,01)),
+				new Person ("Bob", LocalDate.of(1992,06,29))
+				);
+	data.forEach(entityManager::persist);
 		
+		var name = "Bradley Cooper";
+		var personNameRead = repoPerson.findByName(name).stream().findFirst().get();
+		entityManager.flush();
+		//System.out.println("name person : " + nameRead);
+		assertTrue(()-> personNameRead.getName().equals(name));
 	}
 	
-//	@Test
-//	void testPersonByBirthdateYear () {
-//		List<Person> data = List.of(
-//					new Person ("Bradley", LocalDate.of(1975,05,01)),
-//					new Person ("Bob", LocalDate.of(1992,06,29))
-//					);
-//		data.forEach(entityManager::persist);
-//		
-//		//when
-//		var year = 1975;
-//		var dateRead = repoPerson.findByBirthdateYear(year);
-//		System.out.println(dataRead);
-//		
-////		var name = person.getBirthdate();
-////		System.out.println("person by birthdate  : "+ name);
-//	}
+	
+	@Test
+	void testPersonNamePartial () {
+		List<Person> data = List.of(
+				new Person ("Bradley", LocalDate.of(1975,05,01)),
+				new Person ("Bob", LocalDate.of(1992,06,29))
+				);
+	data.forEach(entityManager::persist);
+		
+		var name = "Bradley";
+		var personNameRead = repoPerson.findByName(name).stream().findFirst().get();
+		entityManager.flush();
+		//System.out.println("name person : " + name);
+		assertTrue( () -> personNameRead.getName().contains(name)    );
+	}
+	
+	
+	
+	@Test
+	void testByNameContainingIgnoreCase () {
+		List<Person> data = List.of(
+				new Person ("Bradley Cooper", LocalDate.of(1975,05,01)),
+				new Person ("Bob", LocalDate.of(1992,06,29))
+				);
+	data.forEach(entityManager::persist);
+		
+		var name = "Cooper";
+		var nameReadBrad = repoPerson.findByNameContainingIgnoreCase(name).stream().findFirst().get();
+		//System.out.println("name person : " + nameReadBrad);
+		assertTrue(nameReadBrad.getName().contains(name));
+	}
+	
+	
+	@Test
+	void testPersonByBirthdateYear () {
+		List<Person> data = List.of(
+					new Person ("Bradley", LocalDate.of(1975,05,01)),
+					new Person ("Bob", LocalDate.of(1992,06,29))
+					);
+		data.forEach(entityManager::persist);
+		
+		//when
+		var year = 1975;
+		var dataRead = repoPerson.findByBirthdateYear(year);
+		entityManager.flush();
+		//System.out.println(dataRead);
+		assertTrue (dataRead.stream()
+				.mapToInt(p -> p.getBirthdate().getYear())
+				.allMatch(y -> (y == year))
+				);
+	}
 
+	
+	@Test
+	void testbyPersonId () {
+	//	List<Person> data = List.of(
+				var person = new Person ("Bradley", LocalDate.of(1975,05,01));
+				//new Person ("Bob", LocalDate.of(1992,06,29))
+			//	);
+	//data.forEach(entityManager::persist);
+	entityManager.persist(person);
+	var id = person.getIdPerson();
+	//when
+	var personReadOpt = repoPerson.findById(id);
+	assertAll(
+			() -> assertTrue(personReadOpt.isPresent()),
+			() -> assertEquals(person.getName(), personReadOpt.get().getName())
+			);
+	}
+	
+
+//	@Test
+//	void testbyPersonNationalities () {
+//		var person = new Person ("Bradley", LocalDate.of(1975,05,01), null, "Australien");
+//		entityManager.persist(person);
+//	
+//	
 //	}
+	
+	
 	
 	
 	
 }
+	
+	
+	
+
