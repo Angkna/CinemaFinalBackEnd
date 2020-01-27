@@ -29,7 +29,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	Set<Movie> findByDurationLessThanEqual(int duration);
 	
 	//genres
-	Set<Movie> findByGenres(String genre);
+	//Set<Movie> findByGenres(String genre);
 	
 	//rating
 	Set<Movie> findByRatingGreaterThanEqual(double rating);
@@ -39,10 +39,11 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	
 	//audiance
 	Set<Movie> findByAudiance(Audiance audiance);
-	Set<Movie> findByAndianceLessThenEqual(Audiance audiance);
+	//Set<Movie> findByAudianceLessThenEqual(Audiance audiance);
 	
 	//director
 	Set<Movie> findByDirector (Person director);
+	Set<Movie> findByDirectorName(String name);
 	Set<Movie> findByDirectorNameEndingWith(String name);
 	Set<Movie> findByDirectorIdPerson(int idDirector);
 	

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Movie;
+import cinema.persistence.entity.Person;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
 import cinema.service.IMovieService;
@@ -31,13 +33,100 @@ public class MovieService implements IMovieService {
 	}
 
 	@Override
-	public Set<Movie> getMovieByDirector(String name) {
+	public Optional<Movie> getMovieById(int idMovie) {
+		return movieRepository.findById(idMovie);
+	}
+
+	@Override
+	public Set<Movie> getMovieByTitle(String title) {
+		return movieRepository.findByTitle(title);
+	}
+
+	@Override
+	public Set<Movie> getMovieByTitleContainingIgnoreCase(String title) {
+		return movieRepository.findByTitleContainingIgnoreCase(title);
+	}
+
+	@Override
+	public Set<Movie> getMovieByTitleAndYear(String title, int year) {
+		return movieRepository.findByTitleAndYear(title, year);
+	}
+
+	@Override
+	public Set<Movie> getMovieByYear(int year) {
+		return movieRepository.findByYear(year);
+	}
+
+	@Override
+	public Set<Movie> getMovieByYearLessThan(int year) {
+		return movieRepository.findByYearLessThan(year);
+	}
+
+	@Override
+	public Set<Movie> getMovieByYearGreaterThan(int year) {
+		return movieRepository.findByYearGreaterThan(year);
+	}
+
+	@Override
+	public Set<Movie> getMovieByYearBetween(int year, int year2) {
+		return movieRepository.findByYearBetween(year, year2);
+	}
+
+	@Override
+	public Set<Movie> getMovieByYearAndTitleAndDuration(int year, String title, int duration) {
+		return movieRepository.findByYearAndTitleAndDuration(year, title, duration);
+	}
+
+	@Override
+	public Set<Movie> getMovieByDurationGreaterThan(int duration) {
+		return movieRepository.findByDurationGreaterThan(duration);
+	}
+
+	@Override
+	public Set<Movie> getMovieByDurationBetween(int duration1, int duration2) {
+		return movieRepository.findByDurationBetween(duration1, duration2);
+	}
+
+	@Override
+	public Set<Movie> getMovieByDurationLessThanEqual(int duration) {
+		return movieRepository.findByDurationLessThanEqual(duration);
+	}
+
+	@Override
+	public Set<Movie> getMovieByRatingGreaterThanEqual(double rating) {
+		return movieRepository.findByRatingGreaterThanEqual(rating);
+	}
+
+	@Override
+	public Set<Movie> getMovieBySynopsisContaining(String recherche) {
+		return movieRepository.findBySynopsisContaining(recherche);
+	}
+
+	@Override
+	public Set<Movie> getMovieByAudiance(Audiance audiance) {
+		return movieRepository.findByAudiance(audiance);
+	}
+
+	@Override
+	public Set<Movie> getMovieByDirector(Person person) {
+		return movieRepository.findByDirector(person);
+	}
+
+	@Override
+	public Set<Movie> getMovieByDirectorName(String name) {
+		return movieRepository.findByDirectorName(name);
+	}
+
+	@Override
+	public Set<Movie> getMovieByDirectorNameEndingWith(String name) {
 		return movieRepository.findByDirectorNameEndingWith(name);
 	}
 
 	@Override
-	public Set<Movie> getMovieByActorNameEndingWith(String name) {
-		return movieRepository.findByActorsNameEndingWith(name);
+	public Set<Movie> getMovieByDirectorId(int idDirector) {
+		  var directOpt =personRepository.findById(idDirector); 
+			return directOpt.map(d-> movieRepository.findByDirector(d))
+					.orElseGet( () -> Collections.emptySet());
 	}
 
 	@Override
@@ -51,30 +140,8 @@ public class MovieService implements IMovieService {
 	}
 
 	@Override
-	public Set<Movie> getMovieByTitle(String Title) {
-		return movieRepository.findByTitle(Title);
-	}
-
-	@Override
-	public Set<Movie> getMovieByTitleAndYear(String Title, int Year) {
-		return movieRepository.findByTitleAndYear(Title,Year);
-	}
-
-	@Override
-	public Set<Movie> getMovieByYearBetween(int Year, int Year2) {
-		return movieRepository.findByYearBetween(Year, Year2);
-	}
-
-	@Override
-	public Optional<Movie> getMovieById(int idMovie) {
-		return movieRepository.findById(idMovie);
-	}
-
-	@Override
-	public Set<Movie> getMovieByDirectorId(int idDirector) {
-		  var directOpt =personRepository.findById(idDirector); 
-			return directOpt.map(d-> movieRepository.findByDirector(d))
-					.orElseGet( () -> Collections.emptySet());
+	public Set<Movie> getMovieByActorsNameEndingWith(String name) {
+		return movieRepository.findByActorsNameEndingWith(name);
 	}
 
 	@Override

@@ -45,6 +45,10 @@ public class Movie {
 	public Movie(String title, Integer year, Integer duration) {
 		this(null, title, year, duration, null, null);
 	}
+	
+	public Movie(String title, Integer year, Integer duration, Double rating, Person director) {
+		this(null, title, year, duration, rating, director);
+	}
 
 	public Movie(String title, Integer year, Integer duration, Person director) {
 		this(null, title, year, duration, null, director);
@@ -119,12 +123,12 @@ public class Movie {
 		this.rating = rating;
 	}
 	
-	public String getSysnopsis() {
+	public String getSynopsis() {
 		return synopsis;
 	}
 
-	public void setSysnopsis(String sysnopsis) {
-		this.synopsis = sysnopsis;
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
 	}
 
 	public Audiance getAudiance() {

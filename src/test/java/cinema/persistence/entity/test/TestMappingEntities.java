@@ -1,18 +1,12 @@
 package cinema.persistence.entity.test;
 
 /**
- * *this is not a unit test cas
+ * *this is not a unit test case
  */
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.DynamicTest.stream;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,8 +168,8 @@ class TestMappingEntities {
 		var impitoyable = repoMovies.findByTitle("Impitoyable")
 				.stream().findFirst().get();
 		// read actors
-//		var actors = impitoyable.getActors();
-//		System.out.println(actors);
+		var actors = impitoyable.getActors();
+		System.out.println(actors);
 	}
 
 	@Rollback(false)

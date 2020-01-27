@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Movie;
+import cinema.persistence.entity.Person;
 import cinema.service.IMovieService;
 
 @RestController
@@ -44,28 +46,109 @@ public class MovieController {
 	
 	@GetMapping("/byTitle")
 	@ResponseBody
-	public Set<Movie> movieByTitle(@RequestParam("t") String Title) {
-		return movieService.getMovieByTitle(Title);
+	public Set<Movie> movieByTitle(@RequestParam("t") String title) {
+		return movieService.getMovieByTitle(title);
+	}
+	
+	@GetMapping("/byTitleContaining")
+	@ResponseBody
+	public Set<Movie> movieByTitleContaining(@RequestParam("t") String title) {
+		return movieService.getMovieByTitleContainingIgnoreCase(title);
 	}
 	
 	@GetMapping("/byTitleAndYear")
 	@ResponseBody
-	public Set<Movie> movieByTitleAndYear(@RequestParam("t") String Title,
-									@RequestParam("y") int Year) {
-		return movieService.getMovieByTitleAndYear(Title, Year);
+	public Set<Movie> movieByTitleAndYear(@RequestParam("t") String title,
+									@RequestParam("y") int year) {
+		return movieService.getMovieByTitleAndYear(title, year);
 	}
 
+	@GetMapping("/byYear")
+	@ResponseBody
+	public Set<Movie> movieByYear(@RequestParam("y1") int year){
+		 return movieService.getMovieByYear(year);
+	}
+	
+	@GetMapping("/byYearLessThan")
+	@ResponseBody
+	public Set<Movie> movieByYearLessThan(@RequestParam("y1") int year){
+		 return movieService.getMovieByYearLessThan(year);
+	}
+	
+	@GetMapping("/byYearGreaterThan")
+	@ResponseBody
+	public Set<Movie> movieByYearGreaterThan(@RequestParam("y1") int year){
+		 return movieService.getMovieByYearGreaterThan(year);
+	}
+	
 	@GetMapping("/byYearBetween")
 	@ResponseBody
-	public Set<Movie> movieByYearBetween(@RequestParam("y1") int Year,
-									@RequestParam("y2") int Year2) {
-		 return movieService.getMovieByYearBetween(Year, Year2);
+	public Set<Movie> movieByYearBetween(@RequestParam("y1") int year,
+									@RequestParam("y2") int year2) {
+		 return movieService.getMovieByYearBetween(year, year2);
+	}
+	
+	@GetMapping("/byTitleAndYearAndDuration")
+	@ResponseBody
+	public Set<Movie> movieByTitleAndYearAndDuration(@RequestParam("t") String title,
+									@RequestParam("y") int year,
+									@RequestParam("d") int duration) {
+		return movieService.getMovieByYearAndTitleAndDuration(year, title, duration);
+	}
+	
+	@GetMapping("/byDurationGreaterThan")
+	@ResponseBody
+	public Set<Movie> movieByDurationGreaterThan(@RequestParam("d1") int duration){
+		 return movieService.getMovieByDurationGreaterThan(duration);
+	}
+	
+	@GetMapping("/byDurationBetween")
+	@ResponseBody
+	public Set<Movie> movieByDurationBetween(@RequestParam("d1") int duration1,
+									@RequestParam("d2") int duration2) {
+		 return movieService.getMovieByDurationBetween(duration1, duration2);
+	}
+	
+	@GetMapping("/byDurationLessThanEqual")
+	@ResponseBody
+	public Set<Movie> movieByDurationLessThanEqual(@RequestParam("d1") int duration){
+		 return movieService.getMovieByDurationLessThanEqual(duration);
+	}
+	
+	@GetMapping("/byRatingGreaterThanEqual")
+	@ResponseBody
+	public Set<Movie> movieByRatingGreaterThanEqual(@RequestParam("r") double rating){
+		 return movieService.getMovieByRatingGreaterThanEqual(rating);
+	}
+	
+	@GetMapping("/bySynopsisContaining")
+	@ResponseBody
+	public Set<Movie> movieBySynopsisContaining(@RequestParam("r") String recherche) {
+		return movieService.getMovieBySynopsisContaining(recherche);
+	}
+	
+	@GetMapping("/byAudiance")
+	@ResponseBody
+	public Set<Movie> movieByAudiance(@RequestParam("a") Audiance audiance) {
+		return movieService.getMovieByAudiance(audiance);
 	}
 	
 	@GetMapping("/byDirector")
 	@ResponseBody
-	public Set<Movie> movieByDirector(@RequestParam("d") String name) {
-		return movieService.getMovieByDirector(name);
+	public Set<Movie> movieByDirector(@RequestBody Person person) {
+		return movieService.getMovieByDirector(person);
+	}
+	
+	@GetMapping("/byDirectorName")
+	@ResponseBody
+	public Set<Movie> movieByDirectorName(@RequestParam("d") String name) {
+		return movieService.getMovieByDirectorName(name);
+	}
+	
+	@GetMapping("/byDirectorNameEndingWith")
+	@ResponseBody
+	public Set<Movie> movieByDirectorNameEndingWith(@RequestParam("ne") String partialName) {
+		return movieService.getMovieByDirectorNameEndingWith(partialName);
 	}
 	
 	@GetMapping("/byDirectorId")
@@ -75,16 +158,22 @@ public class MovieController {
 	}
 
 	
-	@GetMapping("/byActor")
+	@GetMapping("/byActorName")
 	@ResponseBody
-	public Set<Movie> movieByActorsName(@RequestParam("a") String Person) {
-		return movieService.getMovieByActorsName(Person);
+	public Set<Movie> movieByActorsName(@RequestParam("a") String name) {
+		return movieService.getMovieByActorsName(name);
 	}
 	
 	@GetMapping("/byActorId")
 	@ResponseBody
 	public Set<Movie> moviebyActorsIdPerson(@RequestParam("a") int idActor) {
 		return movieService.getMovieByActorsIdPerson(idActor);				
+	}
+	
+	@GetMapping("/byActorNameEndingWith")
+	@ResponseBody
+	public Set<Movie> movieByActorsNameEndingWith(@RequestParam("a") String partialName) {
+		return movieService.getMovieByActorsNameEndingWith(partialName);
 	}
 	
 	/**
@@ -108,9 +197,6 @@ public class MovieController {
 	public Optional<Movie> modifyMovie (@RequestBody Movie movie) {
 		return movieService.modifyMovie(movie);
 	}
-	
-	
-	
 	
 	@PutMapping("/addActor") 			//post aurait marché
 	public Optional<Movie> addActor (@RequestParam("a") int idActor, @RequestParam ("m") int idMovie) {
