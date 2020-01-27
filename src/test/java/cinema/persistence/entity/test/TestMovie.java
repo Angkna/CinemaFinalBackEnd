@@ -30,7 +30,7 @@ class TestMovie {
 	EntityManager entityManager; 
 	
 	@Test
-	void test() {
+	void testNewMovie() {
 		Movie movie = new Movie("Joker", 2019);
 		repoMovie.save(movie);
 		var id = movie.getIdMovie();
@@ -38,7 +38,7 @@ class TestMovie {
 		assertNotNull(id);
 	}
 	@Test
-	void testSelectAll() {
+	void testFindAll() {
 		//given
 		List<Movie> data = List.of(
 				new Movie("Joker", 2019),
@@ -77,7 +77,7 @@ class TestMovie {
 	}
 	
 	@Test
-	void testFindByTittle() {
+	void testFindByTitle() {
 		String title = "Le Roi Lion";
 		List<Movie> data = List.of( 
 		new Movie("Parasite",2019, 132),					
@@ -91,7 +91,17 @@ class TestMovie {
 	}
 	
 	@Test
-	void testFindByYear2019() {
+	void testFindByTitleContainingIgnoreCase() {
+		
+	}
+	
+	@Test
+	void testFindByTitleAndYear() {
+		
+	}
+	
+	@Test
+	void testFindByYear() {
 		//given
 		List<Movie> data = List.of(
 				new Movie("Joker", 2019),
@@ -106,9 +116,26 @@ class TestMovie {
 			System.out.println(dataRead);
 	}
 	
+	@Test
+	void testFindByYearLessThan() {
+		//given
+		List<Movie> data = List.of(
+				new Movie("Joker", 2019),
+				new Movie("Parasite",2019, 132),						
+				new Movie("Interstellar",2014, 169),					
+				new Movie("Gran Torino", 2008, 116)	
+				);
+		data.forEach(entityManager::persist);
+
+		//when
+		var year = 2010;
+		var dataRead = repoMovie.findByYearLessThan(year);
+		System.out.println(dataRead);
+			
+	}
 	
 	@Test
-	void testFindByYearSup2010() {
+	void testFindByYearGreaterThan() {
 		//given
 		List<Movie> data = List.of(
 				new Movie("Joker", 2019),
@@ -124,27 +151,8 @@ class TestMovie {
 		System.out.println(dataRead);
 	}
 	
-	
 	@Test
-	void testFindByYearInf2010() {
-		//given
-		List<Movie> data = List.of(
-				new Movie("Joker", 2019),
-				new Movie("Parasite",2019, 132),						
-				new Movie("Interstellar",2014, 169),					
-				new Movie("Gran Torino", 2008, 116)	
-				);
-		data.forEach(entityManager::persist);
-
-		//when
-		var year = 2010;
-		var dataRead = repoMovie.findByYearLessThan(year);
-		System.out.println(dataRead);
-			
-		}
-	
-	@Test
-	void testFindByYearBetween1990And2019() {
+	void testFindByYearBetween() {
 		//given
 		var year1 = 1990;
 		var year2 = 2019;
@@ -167,15 +175,14 @@ class TestMovie {
 			() -> 	assertTrue(dataRead.stream()			// les parenthèse permettent de mettre une chronologie aux 2 tests
 						.mapToInt(Movie::getYear)
 						.allMatch(y -> (y>= year1) && (y<= year2) )) );
-			
-	
 		}
 	//assertAll(
 //			() -> assertTrue(movieReadOpt.isPresent()),
 //			() -> assertEquals(movie.getTitle(), movieReadOpt.get().getTitle())
 //			);
+	
 	@Test
-	void testFindByTitleLeRoiLionAndYear1994() {
+	void testFindByYearAndTitle() {
 		//given
 		List<Movie> data = List.of(
 				new Movie("Joker", 2019),
@@ -192,16 +199,15 @@ class TestMovie {
 		var dataRead = repoMovie.findByYearAndTitle(year, title);
 					//then
 		System.out.println(dataRead);
-		// TODO assert
-		//		assertTrue(dataRead.stream()		
+//		 TODO assert
+//				assertTrue(dataRead.stream()		
 //				.mapToInt(Movie::getYear)
 //				.allMatch(y -> (y= year) && (t <= (t=title)) ) );
 		
-		}
-//	
+	}
 
 	@Test
-	void testFindByTitleLeRoiLionAndYear1994AndDuration() {
+	void testFindByTitleAndYearAndDuration() {
 		//given
 		List<Movie> data = List.of(
 				new Movie("Joker", 2019),
@@ -219,10 +225,50 @@ class TestMovie {
 		var dataRead = repoMovie.findByYearAndTitleAndDuration(year, title, duration);
 						
 		System.out.println(dataRead);
-		}
+	}
 	
 	@Test
-	void testSaveWithDirector() {
+	void testFindByDurationGreaterThan() {
+		
+	}
+	
+	@Test
+	void testFindByDurationBetween() {
+		
+	}
+	
+	@Test
+	void testFindByDurationLessThanEqual() {
+		
+	}
+	
+	@Test
+	void testFindByGenres() {
+		
+	}
+	
+	@Test
+	void testFindByRatingGreaterThanEqual() {
+		
+	}
+	
+	@Test
+	void testFindBySynopsisContaining() {
+		
+	}
+	
+	@Test
+	void testFindByAudiance() {
+		
+	}
+	
+	@Test
+	void testFindByAudianceLessThanEqual() {
+		
+	}
+	
+	@Test
+	void testSaveMovieWithDirector() {
 		//Given
 		Person person = new Person ("Todd Phillips", LocalDate.of(1970,12,20));
 		Movie movie = new Movie("Joker", 2019, 165, person);
@@ -231,6 +277,31 @@ class TestMovie {
 		//var id = movie.getIdMovie();
 		System.out.println(movie);
 		System.out.println(person);
+	}
+	
+	@Test
+	void testFindByDirector() {
+		
+	}
+	
+	@Test
+	void testFindByDirectorNameEndingWith() {
+		
+	}
+	
+	@Test
+	void testFindByDirectorIdPerson() {
+		
+	}
+	
+	@Test
+	void testFindByActorsName() {
+		
+	}
+	
+	@Test
+	void testFindByActorsIdPerson() {
+		
 	}
 	
 	@Test
