@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -21,7 +24,7 @@ public class Person {
 	private Integer idPerson;
 	private String name;  		
 	private LocalDate birthdate;
-	private List<String> nationalities;
+	private List<Nationality> nationalities;
 	private String biography;
 	
 	
@@ -79,13 +82,14 @@ public class Person {
 		this.birthdate = birthdate;
 	} 	
 	
-//	public List<String> getNationalities() {
-//		return nationalities;
-//	}
-//
-//	public void setNationalities(List<String> nationalities) {
-//		this.nationalities = nationalities;
-//	}
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Nationality> getNationalities() {
+		return nationalities;
+	}
+
+	public void setNationalities(List<Nationality> nationalities) {
+		this.nationalities = nationalities;
+	}
 	
 	public String getBiography() {
 		return biography;
