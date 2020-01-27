@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 import cinema.service.IPersonService;
 
@@ -23,9 +21,7 @@ import cinema.service.IPersonService;
 public class PersonController {
 	
 	@Autowired
-	IPersonService personService;
-	
-	
+	IPersonService personService;	
 	
 	
 	@GetMapping ("/getAllPersons")
@@ -55,12 +51,11 @@ public class PersonController {
 	
 	///////////////////////////////////////////////////
 	
-//	@PostMapping 
-//	Person addPerson(Person person){
-//		//TODO
-//				return null;
+	@PostMapping 
+	Person addPerson(Person person){
+		return personService.addPerson(person);
 		
-	//}
+	}
 
 
 }

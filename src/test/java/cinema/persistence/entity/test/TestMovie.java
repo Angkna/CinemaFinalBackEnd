@@ -222,7 +222,6 @@ class TestMovie {
 		}
 	
 	@Test
-	
 	void testSaveWithDirector() {
 		//Given
 		Person person = new Person ("Todd Phillips", LocalDate.of(1970,12,20));

@@ -41,6 +41,12 @@ public class PersonService implements IPersonService {
 		return personRepository.findById(idPerson);
 	}
 
+	@Override
+	public Person addPerson(Person person) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 	

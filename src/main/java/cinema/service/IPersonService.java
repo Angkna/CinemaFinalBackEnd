@@ -12,6 +12,7 @@ public interface IPersonService {
 	Set<Person> getByNameContainingIgnoreCase(String name);
 	Set<Person> getByBirthdateYear(int year);
 	Optional<Person> getByPersonId(int idPerson);
+	Person addPerson(Person person);
 
 
 }
