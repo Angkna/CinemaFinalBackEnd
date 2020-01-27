@@ -20,7 +20,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 	Set <Person> findByBirthdateYear(int year);
 	
 	//Nationality
-	Set<Person> findByNationalities(String nationality);
+	//Set<Person> findByNationalities(String nationality);
 
 	//TODO for strong develp
 //	@Query"select p from Person p where extract (year from p.birthdate) = ?
