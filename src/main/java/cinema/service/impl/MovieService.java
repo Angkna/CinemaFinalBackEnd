@@ -91,6 +91,11 @@ public class MovieService implements IMovieService {
 	public Set<Movie> getMovieByDurationLessThanEqual(int duration) {
 		return movieRepository.findByDurationLessThanEqual(duration);
 	}
+	
+	@Override
+	public Set<Movie> getMovieByGenresGenreIgnoreCase(String genre) {
+		return movieRepository.findByGenresGenreIgnoreCase(genre);
+	}	
 
 	@Override
 	public Set<Movie> getMovieByRatingGreaterThanEqual(double rating) {
@@ -194,5 +199,7 @@ public class MovieService implements IMovieService {
 		movieRepository.flush();
 		});
 		return movieToDelete;
-	}	
+	}
+
+
 }

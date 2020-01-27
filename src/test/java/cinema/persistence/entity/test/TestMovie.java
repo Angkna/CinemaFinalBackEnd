@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import cinema.persistence.entity.Audiance;
+import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.MovieRepository;
@@ -282,10 +283,41 @@ class TestMovie {
 		assertTrue(dataRead.stream().allMatch(m -> m.getDuration() <= duration));
 	}
 
-	//	@Test
-	//	void testFindByGenres() {
-	//		
-	//	}
+	@Test
+	void testFindByGenres() {
+		var horror = new Genre("horror");		
+		var action = new Genre("action");
+		var fantasy = new Genre("fantasy");
+		var adventure = new Genre("adventure");
+		var animation = new Genre("animation");
+		var genres = List.of(horror, action, fantasy, adventure, animation);
+		genres.forEach(entityManager::persist);
+
+		var joker = new Movie("Joker", 2019, 165);	
+		var parasite = new Movie("Parasite",2019, 132);
+		var interstellar = new Movie("Interstellar",2014, 169);		
+		var granTorino= new Movie("Gran Torino", 2008, 116);	
+		var impitoyable = new Movie("Impitoyable", 1992, 130);			
+		var infwar = new Movie("Avengers: Infinity War", 2018, 149);
+		var end = new Movie("Avengers: Endgame", 2019, 181);				
+		var genres1 = List.of(horror);
+		var genres2 = List.of(action, adventure);
+		var genres3 = List.of(animation, adventure, fantasy);
+		joker.setGenres(genres1);
+		interstellar.setGenres(genres2);
+		infwar.setGenres(genres3);
+		var movies = List.of(joker, parasite, interstellar, granTorino, impitoyable, infwar, end);
+		movies.forEach(entityManager::persist);
+
+		String genreRead = "adventure";
+		var dataRead = repoMovie.findByGenresGenreIgnoreCase(genreRead);
+		System.out.println(dataRead);
+		assertTrue(dataRead.stream()
+				.allMatch(m -> m.getGenres().stream()	
+						.map(Genre::getGenre)
+						.anyMatch(n -> n.equals(genreRead))	
+						));
+	}
 
 	@Test
 	void testFindByRatingGreaterThanEqual() {

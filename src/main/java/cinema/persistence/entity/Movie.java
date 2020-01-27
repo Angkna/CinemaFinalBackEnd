@@ -26,7 +26,7 @@ public class Movie {
 	private String title;
 	private Integer year; 			 //pour ne pas s'embeter on met en int en objet
 	private Integer duration; 		//pour les champs NON obligatoire on passe par le objet de int :Integer
-	private List<String> genres;
+	private List<Genre> genres;
 	private Double rating; 
 	private String synopsis;
 	private Audiance audiance;
@@ -60,7 +60,7 @@ public class Movie {
 		this.title = title;
 		this.year = year;
 		this.duration = duration;
-		//this.genres = new ArrayList<String>();
+		this.genres = new ArrayList<Genre>();
 		this.rating = rating;
 		this.synopsis = "";
 		this.audiance = null;
@@ -72,7 +72,6 @@ public class Movie {
 	@Id										//le definit comme id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_movie")
-
 	public Integer getIdMovie() {
 		return idMovie;
 	}
@@ -106,14 +105,18 @@ public class Movie {
 	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
+	
+	@ManyToMany
+	@JoinTable(name="genrementation",
+			joinColumns = @JoinColumn(name="id_movie"),
+			inverseJoinColumns = @JoinColumn(name="id_genre"))
+	public List<Genre> getGenres() {
+		return genres;
+	}
 
-//	public List<String> getGenres() {
-//		return genres;
-//	}
-//
-//	public void setGenres(List<String> genres) {
-//		this.genres = genres;
-//	}
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
 
 	public Double getRating() {
 		return rating;

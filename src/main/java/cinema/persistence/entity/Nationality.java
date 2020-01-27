@@ -15,6 +15,10 @@ public class Nationality {
 		super();
 	}
 	
+	public Nationality(String nationalitiy) {
+		this(null, nationalitiy);
+	}
+	
 	public Nationality(Integer id, String nationality) {
 		super();
 		this.id = id;

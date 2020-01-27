@@ -28,6 +28,8 @@ public interface IMovieService {
 	Set<Movie> getMovieByDurationBetween(int duration1, int duration2);
 	Set<Movie> getMovieByDurationLessThanEqual(int duration);
 	
+	Set<Movie> getMovieByGenresGenreIgnoreCase(String genre);
+	
 	Set<Movie> getMovieByRatingGreaterThanEqual(double rating);
 	
 	Set<Movie> getMovieBySynopsisContaining(String recherche);
