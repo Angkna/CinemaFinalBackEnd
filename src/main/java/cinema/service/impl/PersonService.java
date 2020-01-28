@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
+import cinema.persistence.repository.NationalityRepository;
 import cinema.persistence.repository.PersonRepository;
 import cinema.service.IPersonService;
 
@@ -20,10 +21,13 @@ public class PersonService implements IPersonService {
 	@Autowired
 	PersonRepository personRepository;
 	
+	@Autowired
+	NationalityRepository nationalityRepository;
+	
 	@Override
 	public List<Person> getAllPersons() {
-		// TODO Auto-generated method stub
-		return null;
+		return personRepository.findAll();
+		
 	}
 
 	@Override
@@ -51,6 +55,24 @@ public class PersonService implements IPersonService {
 	@Override
 	public Set<Person> getByNationality(String nationality) {
 		return personRepository.findByNationalitiesNationality(nationality);
+	}
+
+	@Override
+	public Nationality addNationality(String nationality) {
+		Nationality nationalitySave = nationalityRepository.save(new Nationality(nationality));
+		nationalityRepository.flush();
+		return nationalitySave;
+	}
+
+	@Override
+	public Optional<Person> addNationalityToPerson(String nationality, int idPerson) {
+		var nationalitySave = nationalityRepository.findByNationality(nationality);
+		var personSave = personRepository.findById(idPerson);
+		if (personSave.isPresent() && nationalitySave.isPresent() ) {
+		personSave.get().getNationalities().add(nationalitySave.get());
+		personRepository.flush();
+		}
+		return personSave;
 	}
 	
 	

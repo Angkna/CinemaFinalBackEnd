@@ -15,5 +15,6 @@ public interface IPersonService {
 	Optional<Person> getByIdPerson(int idPerson);
 	Person addPerson(Person person);
 	Set<Person> getByNationality(String nationality);
-
+	Nationality addNationality(String nationality);
+	Optional<Person> addNationalityToPerson(String nationality, int idPerson);
 }

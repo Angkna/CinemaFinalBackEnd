@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,13 +51,6 @@ public class PersonController {
 		return personService.getByBirthdateYear(year);
 	}
 	
-	//NEMARCHEPAS!!!!!
-//	@GetMapping ("/byPersonId")
-//	@ResponseBody
-//		public Optional<Person> findByPersonId(@PathVariable("a") int idPerson) {
-//		return personService.getByPersonId(idPerson);
-//	}
-		
 		
 	@GetMapping("/{id}")
 	@ResponseBody
@@ -67,10 +61,10 @@ public class PersonController {
 		
 		
 	
-	//A tester!!!
+	//à revérifier après ajout de nationalité dans base de donnée 
 	@GetMapping ("/byNationalities")
 	@ResponseBody
-		public Set<Person> findByNationalities(String nationalities) {
+		public Set<Person> findByNationalities(@RequestParam("n") String nationalities) {
 			return personService.getByNationality(nationalities);
 	}
 	
@@ -82,5 +76,16 @@ public class PersonController {
 			return personService.addPerson(person);	
 	}
 
+	@PostMapping ("/addNewNationality")
+	Nationality addNationality(@RequestParam("n") String nationality){
+		return personService.addNationality(nationality);	
+	}
 
+	///////////////////////////PUT////////////////////////
+	
+	@PutMapping ("/addNationalityToPerson")
+		Optional<Person> addNationalityToPerson(@RequestParam("n") String nationality, @RequestParam("p") int idPerson) {
+		return personService.addNationalityToPerson(nationality, idPerson);
+	}
+	
 }
