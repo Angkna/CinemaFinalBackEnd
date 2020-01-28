@@ -116,6 +116,7 @@ public class MovieController {
 		 return movieService.getMovieByDurationLessThanEqual(duration);
 	}
 	
+	//A tester /////////////////////////////////////////////////////
 	@GetMapping("/byGenre")
 	@ResponseBody
 	public Set<Movie> movieByGenresGenreIgnoreCase(@RequestParam("g") String genre){
@@ -139,6 +140,7 @@ public class MovieController {
 	public Set<Movie> movieByAudiance(@RequestParam("a") Audiance audiance) {
 		return movieService.getMovieByAudiance(audiance);
 	}
+	
 	
 	@GetMapping("/byDirector")
 	@ResponseBody
