@@ -16,8 +16,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import cinema.persistence.entity.Audiance;
+import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+import cinema.persistence.repository.GenreRepository;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
 
@@ -34,6 +36,8 @@ class TestMappingEntities {
 	PersonRepository repoPersons;
 	@Autowired
 	MovieRepository repoMovies;
+	@Autowired
+	GenreRepository repoGenres;
 	
 	
 	@Rollback(false)
@@ -46,10 +50,20 @@ class TestMappingEntities {
 		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5))	;		
 		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
 		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
-		
 		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan);
 		persons.forEach(repoPersons::save);
 		
+		//genre
+		var horror = new Genre("horror");		
+		var action = new Genre("action");
+		var fantasy = new Genre("fantasy");
+		var adventure = new Genre("adventure");
+		var animation = new Genre("animation");
+		var genres = List.of(horror, action, fantasy, adventure, animation);
+		genres.forEach(repoGenres::save);
+		
+		
+		//films
 		var joker = new Movie("Joker", 2019, 165, 9.3, todd);	
 		var parasite = new Movie("Parasite",2019, 132);
 		var interstellar = new Movie("Interstellar",2014, 169);		
@@ -62,17 +76,35 @@ class TestMappingEntities {
 		var aven = new Movie("Avengers", 2012, 143);					
 		var marvel = new Movie("Captain Marvel", 2019, 123);				
 		var ultron = new Movie("Avengers : L'ere d'Ultron", 2015, 141);	
-		//var pouvoirs = new Movie("Les pleins pouvoirs", 1997);
+		var pouvoirs = new Movie("Les pleins pouvoirs", 1997);
 				
 		var movies = List.of(joker,parasite,interstellar,granTorino, impitoyable, snip,bad, infwar, 
-									end,aven,marvel,ultron);
+			
+				end,aven,marvel,ultron, pouvoirs);
+		//genres
+		var genres1 = List.of(horror);
+		var genres2 = List.of(action, adventure);
+		var genres3 = List.of(animation, adventure, fantasy);
+		var genres4 = List.of(action);
+		var genres5 = List.of(adventure);
+		
+		joker.setGenres(genres1);
+		interstellar.setGenres(genres2);
+		infwar.setGenres(genres3);
+		aven.setGenres(genres4);
+		granTorino.setGenres(genres5);
+		
+		//synopsis
 		infwar.setSynopsis("Des mechants veulent voler un gant magique pour dominer l univers mouhahahahha");
 		parasite.setSynopsis("des humains tels des parasites veulent voler la maison de gens riches");
 		end.setSynopsis("c est la fin de la guerre pour le gant magique et ca finit pas vraiment bien pour certains");
 		
+		//audiance
 		snip.setAudiance(Audiance.NC17);
 		marvel.setAudiance(Audiance.PG);
 		bad.setAudiance(Audiance.PG13);
+		
+		
 		
 		movies.forEach(repoMovies::save);
 		

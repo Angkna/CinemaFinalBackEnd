@@ -59,9 +59,6 @@ public class PersonController {
 	}
 
 		
-		
-	
-	//à revérifier après ajout de nationalité dans base de donnée 
 	@GetMapping ("/byNationalities")
 	@ResponseBody
 		public Set<Person> findByNationalities(@RequestParam("n") String nationalities) {

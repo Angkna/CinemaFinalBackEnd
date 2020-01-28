@@ -371,10 +371,7 @@ class TestMovie {
 		assertTrue(dataRead.stream().allMatch(m -> m.getAudiance() == Audiance.PG13));
 	}
 
-	//	@Test
-	//	void testFindByAudianceLessThanEqual() {
-	//		
-	//	}
+	
 
 	@Test
 	void testSaveMovieWithDirector() {
