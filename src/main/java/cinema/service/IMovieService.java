@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import cinema.persistence.entity.Audiance;
+import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 
@@ -48,9 +49,11 @@ public interface IMovieService {
 	
 	//post-put
 	Movie addMovie(Movie movie);
+	Genre addGenre(String genre);
 	Optional<Movie> modifyMovie (Movie movie);
 	Optional<Movie> addActor (int idActor, int idMovie);
 	Optional<Movie> setDirector (int idDirector, int idMovie);
+	Optional<Movie> addGenreToMovie (String genre, int idMovie);
 	
 	//delete
 	Optional<Movie> deleteMovie (int idMovie);

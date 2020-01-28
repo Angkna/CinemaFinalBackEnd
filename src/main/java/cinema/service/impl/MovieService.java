@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cinema.persistence.entity.Audiance;
+import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+import cinema.persistence.repository.GenreRepository;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
 import cinema.service.IMovieService;
@@ -26,6 +28,8 @@ public class MovieService implements IMovieService {
 	MovieRepository movieRepository;
 	@Autowired
 	PersonRepository personRepository;
+	@Autowired
+	GenreRepository genreRepository;
 
 	@Override
 	public List<Movie> getAllMovies() {
@@ -199,6 +203,28 @@ public class MovieService implements IMovieService {
 		movieRepository.flush();
 		});
 		return movieToDelete;
+	}
+
+	@Override
+	public Optional<Movie> addGenreToMovie(String genre, int idMovie) {
+		var movieOpt = movieRepository.findById(idMovie);
+		var genreOpt = genreRepository.findByGenre(genre);
+		if (movieOpt.isPresent() && genreOpt.isPresent()) {
+			movieOpt.get().getGenres().add(genreOpt.get());
+			movieRepository.flush();
+		}
+		return movieOpt;
+	}
+
+	@Override
+	public Genre addGenre(String genre) {
+		var exist = genreRepository.findByGenre(genre);
+		if (exist.isEmpty()) {
+			Genre genreNew = genreRepository.save(new Genre(genre));
+			genreRepository.flush();
+			return genreNew;
+		}
+		return exist.get();
 	}
 
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cinema.persistence.entity.Audiance;
+import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 import cinema.service.IMovieService;
@@ -214,6 +215,16 @@ public class MovieController {
 						@RequestParam("m") int idMovie) {
 		return movieService.setDirector(idDirector, idMovie);
 	}
+	
+	@PostMapping ("/addNewGenre")
+	public Genre addGenre(@RequestParam("n") String genre){
+		return movieService.addGenre(genre);	
+	}
+	
+	@PutMapping ("/addGenreToMovie")
+	public Optional<Movie> addGenreToMovie(@RequestParam("g") String genre, @RequestParam("m") int idMovie) {
+	return movieService.addGenreToMovie(genre, idMovie);
+}
 	
 	
 	////////////////////////Delete////////////////////////
