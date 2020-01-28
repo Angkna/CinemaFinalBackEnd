@@ -50,15 +50,15 @@ class TestMappingEntities {
 		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5))	;		
 		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
 		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
-		var brie = new Person("Brie Larson");
-		var kevin = new Person("Kevin Bacon");
-		var tom = new Person("Tom Hanks");
-		var meryl = new Person ("Meryl Streep");
-		var colin = new Person("Colin Firth");
-		var helena = new Person ("Helena Bonham Carter");
-		var kate = new Person ("Cate Blanchett");
-		var viggo = new Person ("Viggo Mortensen");
-		var franck = new Person ("Frank Langella");
+		var brie = new Person("Brie Larson",LocalDate.of(1989, 10, 1));
+		var kevin = new Person("Kevin Bacon", LocalDate.of(1958, 8, 8));
+		var tom = new Person("Tom Hanks",LocalDate.of(1956, 7, 9));
+		var meryl = new Person ("Meryl Streep",LocalDate.of(1949, 6, 22));
+		var colin = new Person("Colin Firth", LocalDate.of(1960, 9, 10));
+		var helena = new Person ("Helena Bonham Carter", LocalDate.of(1966, 5, 26));
+		var kate = new Person ("Cate Blanchett",LocalDate.of(1969, 5, 14));
+		var viggo = new Person ("Viggo Mortensen", LocalDate.of(1968, 7, 20));
+		var franck = new Person ("Frank Langella",LocalDate.of(1938, 1, 1));
 		
 		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan, brie, kevin, tom, meryl, colin, helena,
 									kate, viggo, franck
@@ -131,11 +131,92 @@ class TestMappingEntities {
 		marvel.setAudiance(Audiance.PG);
 		bad.setAudiance(Audiance.PG13);
 		
+		//biography
+		brie.setBiography("Brie Larson has built an impressive career as an acclaimed television actress, rising feature film star and emerging recording artist. A native of Sacramento, Brie started studying drama at the early age of 6, as the youngest student ever to attend the American Conservatory Theater in San Francisco");
+		brad.setBiography("Bradley Charles Cooper was born on January 5, 1975 in Philadelphia, Pennsylvania. His mother, Gloria (Campano), is of Italian descent, and worked for a local NBC station. His father, Charles John Cooper, who was of Irish descent, was a stockbroker.");
+		gene.setBiography("Eugene Allen Hackman was born in San Bernardino, California, the son of Ann-nnsylvania Dutch (German), English, and Scottish ancestry, partly by way of Canada, where his mother was born.");
 		
 		
 		movies.forEach(repoMovies::save);
 		
 	}
+		
+	@Rollback(false)
+	@Test
+	void scenarioMovieWithActors22() {
+			//apollon13
+			var ap13 = repoMovies.findByTitle("Apollon 13")
+								.stream().findFirst().get();
+			var kevin = repoPersons.findByName("Kevin Bacon")
+							.stream().findFirst().get();
+			var tom = repoPersons.findByName("Tom Hanks")
+							.stream().findFirst().get();
+			ap13.setActors(List.of(tom, kevin));
+			repoMovies.flush();
+			//pentagon papers
+			var paper = repoMovies.findByTitle("Pentagon Papers")
+					.stream().findFirst().get();
+			var meryl = repoPersons.findByName("Meryl Streep")
+					.stream().findFirst().get();
+//			var tom2 = repoPersons.findByName("Tom Hanks")
+//					.stream().findFirst().get();
+			paper.setActors(List.of(tom, meryl));
+			repoMovies.flush();
+			//mamma mia
+			var mamma = repoMovies.findByTitle("Mamma Mia")
+					.stream().findFirst().get();
+			var colin = repoPersons.findByName("Colin Firth")
+					.stream().findFirst().get();
+			
+			mamma.setActors(List.of(meryl, colin));
+			repoMovies.flush();
+			// discours roi
+			var roi = repoMovies.findByTitle("Le discours d un roi")
+					.stream().findFirst().get();
+			var helena = repoPersons.findByName("Helena Bonham Carter")
+					.stream().findFirst().get();
+			roi.setActors(List.of(colin, helena));
+			repoMovies.flush();
+			//ocean8
+			var ocean = repoMovies.findByTitle("Ocean s 8")
+					.stream().findFirst().get();
+			var kate = repoPersons.findByName("Kate Blanchett")
+					.stream().findFirst().get();
+			ocean.setActors(List.of(kate, helena));
+			repoMovies.flush();
+			//SDA
+			var anneaux = repoMovies.findByTitle("Le seigneur des anneaux")
+					.stream().findFirst().get();
+			var viggo = repoPersons.findByName("Vigo Mortensen")
+					.stream().findFirst().get();
+			anneaux.setActors(List.of(kate, viggo));
+			repoMovies.flush();
+			//captainfantastic
+			var fantastic = repoMovies.findByTitle("Captain Fantastic")
+					.stream().findFirst().get();
+			var frank = repoPersons.findByName("Frank Langella")
+					.stream().findFirst().get();
+			fantastic.setActors(List.of(frank, viggo));
+			repoMovies.flush();
+			
+	}
+		
+		
+//		var impitoyable = repoMovies.findByTitle("Impitoyable")
+//							.stream().findFirst().get();
+//			var clint = repoPersons.findByName("Clint Eastwood")
+//							.stream().findFirst().get();
+//			var gene = repoPersons.findByName("Gene Hackman")
+//							.stream().findFirst().get();
+//			impitoyable.setActors(List.of(clint, gene));
+//			repoMovies.flush();
+		
+		
+		
+		
+		
+		
+	
 
 	@Rollback(false)
 	@Test

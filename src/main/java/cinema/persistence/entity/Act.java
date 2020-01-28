@@ -4,7 +4,27 @@ public class Act {
 	private Integer idMovie;
 	private Integer idPerson;
 	private String role;
+	
+	
+	
+	public Act(Integer idMovie, Integer idPerson, String role) {
+		super();
+		this.idMovie = idMovie;
+		this.idPerson = idPerson;
+		this.role = role;
+	}
+
+	
+
+	
+	
+	
+	
+	
 }
+
+
+
 
 
 //Bradley Cooper			Chris Kyle				American Sniper

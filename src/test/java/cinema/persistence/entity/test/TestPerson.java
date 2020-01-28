@@ -160,8 +160,7 @@ class TestPerson {
 //		assertTrue(nationalityRead.stream()
 //				.map(Nationality::getNationality)	
 //				.allMatch(n -> n.equals(Australie)));
-				
-	
+			
 	}
 	
 	
