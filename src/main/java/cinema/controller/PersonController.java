@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
 import cinema.service.IPersonService;
 
 @RestController
-@RequestMapping("/api/movie")
+@RequestMapping("/api/person")
 
 public class PersonController {
 	
@@ -28,7 +29,8 @@ public class PersonController {
 	IPersonService personService;	
 	
 	
-	@GetMapping ("/getAllPersons")
+	@GetMapping
+	@ResponseBody
 	public List<Person>getAllPersons() {
 		return personService.getAllPersons();
 		
@@ -49,21 +51,32 @@ public class PersonController {
 	}
 	
 	//NEMARCHEPAS!!!!!
-	@GetMapping ("/byPersonId")
+//	@GetMapping ("/byPersonId")
+//	@ResponseBody
+//		public Optional<Person> findByPersonId(@PathVariable("a") int idPerson) {
+//		return personService.getByPersonId(idPerson);
+//	}
+		
+		
+	@GetMapping("/{id}")
 	@ResponseBody
-		public Optional<Person> findByPersonId(@PathVariable("a") int idPerson) {
-		return personService.getByPersonId(idPerson);
+	public Optional<Person> personById(@PathVariable("id")int idPerson) {
+		return personService.getByIdPerson(idPerson);
 	}
+
+		
+		
 	
+	//A tester!!!
 	@GetMapping ("/byNationalities")
 	@ResponseBody
-		public Set<Person> findByNationalities(Nationality nationalities) {
+		public Set<Person> findByNationalities(String nationalities) {
 			return personService.getByNationality(nationalities);
 	}
 	
-	///////////////////////////////////////////////////
+	///////////////////////POST////////////////////////////
 	
-	//NEMARCHEPAS!!!!
+	
 	@PostMapping ("/addPerson")
 		Person addPerson(@RequestBody Person person){
 			return personService.addPerson(person);	

@@ -154,7 +154,7 @@ class TestPerson {
 		entityManager.persist(ana);
 		
 		///when
-		var nationalityRead = repoPerson.findByNationalities(Australie);
+		var nationalityRead = repoPerson.findByNationalitiesNationality(Australie.getNationality());
 		System.out.println(nationalityRead);
 		
 //		assertTrue(nationalityRead.stream()

@@ -12,8 +12,8 @@ public interface IPersonService {
 	List<Person> getAllPersons();
 	Set<Person> getByNameContainingIgnoreCase(String name);
 	Set<Person> getByBirthdateYear(int year);
-	Optional<Person> getByPersonId(int idPerson);
+	Optional<Person> getByIdPerson(int idPerson);
 	Person addPerson(Person person);
-	Set<Person> getByNationality(Nationality nationalities);
+	Set<Person> getByNationality(String nationality);
 
 }

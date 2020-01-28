@@ -37,20 +37,20 @@ public class PersonService implements IPersonService {
 	}
 
 	@Override
-	public Optional<Person> getByPersonId(int idPerson) {
-		// TODO Auto-generated method stub
-		return personRepository.findById(idPerson);
+	public Optional<Person> getByIdPerson(int idPerson) {
+			return personRepository.findById(idPerson);
 	}
 
 	@Override
 	public Person addPerson(Person person) {
-		// TODO Auto-generated method stub
-		return null;
+		Person personSave = personRepository.save(person);
+		personRepository.flush();
+		return personSave;
 	}
 
 	@Override
-	public Set<Person> getByNationality(Nationality nationalities) {
-		return personRepository.findByNationalities(nationalities);
+	public Set<Person> getByNationality(String nationality) {
+		return personRepository.findByNationalitiesNationality(nationality);
 	}
 	
 	
