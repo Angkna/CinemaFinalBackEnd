@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.MovieRepository;
@@ -49,13 +50,13 @@ class TestMappingEntities {
 		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan);
 		persons.forEach(repoPersons::save);
 		
-		var joker = new Movie("Joker", 2019, 165, todd);	
+		var joker = new Movie("Joker", 2019, 165, 9.3, todd);	
 		var parasite = new Movie("Parasite",2019, 132);
 		var interstellar = new Movie("Interstellar",2014, 169);		
 		var granTorino= new Movie("Gran Torino", 2008, 116, clint);	
 		var impitoyable = new Movie("Impitoyable", 1992, 130, clint);	
-		var snip = new Movie("American Sniper", 2014, 133, clint);		
-		var bad = new Movie("Very Bad Trip", 2009, 100, todd);	
+		var snip = new Movie("American Sniper", 2014, 133, 8.1, clint);		
+		var bad = new Movie("Very Bad Trip", 2009, 100, 5.1, todd);	
 		var infwar = new Movie("Avengers: Infinity War", 2018, 149);
 		var end = new Movie("Avengers: Endgame", 2019, 181);				
 		var aven = new Movie("Avengers", 2012, 143);					
@@ -65,6 +66,14 @@ class TestMappingEntities {
 				
 		var movies = List.of(joker,parasite,interstellar,granTorino, impitoyable, snip,bad, infwar, 
 									end,aven,marvel,ultron);
+		infwar.setSynopsis("Des mechants veulent voler un gant magique pour dominer l univers mouhahahahha");
+		parasite.setSynopsis("des humains tels des parasites veulent voler la maison de gens riches");
+		end.setSynopsis("c est la fin de la guerre pour le gant magique et ca finit pas vraiment bien pour certains");
+		
+		snip.setAudiance(Audiance.NC17);
+		marvel.setAudiance(Audiance.PG);
+		bad.setAudiance(Audiance.PG13);
+		
 		movies.forEach(repoMovies::save);
 		
 	}

@@ -59,9 +59,14 @@ public class PersonService implements IPersonService {
 
 	@Override
 	public Nationality addNationality(String nationality) {
-		Nationality nationalitySave = nationalityRepository.save(new Nationality(nationality));
-		nationalityRepository.flush();
-		return nationalitySave;
+		var exist = nationalityRepository.findByNationality(nationality);
+			
+		if(exist.isEmpty() ) {
+				Nationality nationalitySave = nationalityRepository.save(new Nationality(nationality));
+				nationalityRepository.flush();
+				return nationalitySave;
+		}
+		return exist.get();
 	}
 
 	@Override
