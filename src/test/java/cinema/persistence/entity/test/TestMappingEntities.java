@@ -50,7 +50,19 @@ class TestMappingEntities {
 		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5))	;		
 		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
 		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
-		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan);
+		var brie = new Person("Brie Larson");
+		var kevin = new Person("Kevin Bacon");
+		var tom = new Person("Tom Hanks");
+		var meryl = new Person ("Meryl Streep");
+		var colin = new Person("Colin Firth");
+		var helena = new Person ("Helena Bonham Carter");
+		var kate = new Person ("Cate Blanchett");
+		var viggo = new Person ("Viggo Mortensen");
+		var franck = new Person ("Frank Langella");
+		
+		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan, brie, kevin, tom, meryl, colin, helena,
+									kate, viggo, franck
+									);
 		persons.forEach(repoPersons::save);
 		
 		//genre
@@ -59,7 +71,8 @@ class TestMappingEntities {
 		var fantasy = new Genre("fantasy");
 		var adventure = new Genre("adventure");
 		var animation = new Genre("animation");
-		var genres = List.of(horror, action, fantasy, adventure, animation);
+		var amour = new Genre ("amour");
+		var genres = List.of(horror, action, fantasy, adventure, animation, amour);
 		genres.forEach(repoGenres::save);
 		
 		
@@ -77,27 +90,41 @@ class TestMappingEntities {
 		var marvel = new Movie("Captain Marvel", 2019, 123);				
 		var ultron = new Movie("Avengers : L'ere d'Ultron", 2015, 141);	
 		var pouvoirs = new Movie("Les pleins pouvoirs", 1997);
-				
+		var ap13 = new Movie("Apollon 13",1995);
+		var paper = new Movie("Pentagon Papers", 2018);
+		var mamma = new Movie("Mamma Mia!" ,2008);
+		var roi = new Movie ("Le discours d un roi",2011);
+		var ocean = new Movie("Ocean s 8", 2018);
+		var anneaux = new Movie ("Le Seigneur des anneaux", 2002);
+		var fantastic = new Movie ("Captain Fantastic", 2016);
+		
 		var movies = List.of(joker,parasite,interstellar,granTorino, impitoyable, snip,bad, infwar, 
-			
-				end,aven,marvel,ultron, pouvoirs);
+							end,aven,marvel,ultron, pouvoirs, ap13, paper, mamma, roi, ocean, anneaux,
+							fantastic
+							);
 		//genres
 		var genres1 = List.of(horror);
 		var genres2 = List.of(action, adventure);
 		var genres3 = List.of(animation, adventure, fantasy);
 		var genres4 = List.of(action);
 		var genres5 = List.of(adventure);
+		var genres6 = List.of(amour);
 		
 		joker.setGenres(genres1);
 		interstellar.setGenres(genres2);
 		infwar.setGenres(genres3);
 		aven.setGenres(genres4);
 		granTorino.setGenres(genres5);
+		mamma.setGenres(genres6);
 		
 		//synopsis
 		infwar.setSynopsis("Des mechants veulent voler un gant magique pour dominer l univers mouhahahahha");
 		parasite.setSynopsis("des humains tels des parasites veulent voler la maison de gens riches");
 		end.setSynopsis("c est la fin de la guerre pour le gant magique et ca finit pas vraiment bien pour certains");
+		anneaux.setSynopsis("un anneaux pour les controller tous et dans les tenebres les lier !!");
+		mamma.setSynopsis("film de fille #romantisme #chanson, #amour #3papasWTF");
+		ap13.setSynopsis("direction les tenebres de la lune");
+		snip.setSynopsis("l hisoire vrai d un sniper americain dans les tenebres de la guerre de l irak ");
 		
 		//audiance
 		snip.setAudiance(Audiance.NC17);
