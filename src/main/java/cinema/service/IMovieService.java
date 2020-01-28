@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import cinema.persistence.entity.Act;
 import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
@@ -57,4 +58,7 @@ public interface IMovieService {
 	
 	//delete
 	Optional<Movie> deleteMovie (int idMovie);
+	
+//	//test act
+//	Act addAct (Movie movie, Person person, String role);
 }

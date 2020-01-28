@@ -159,7 +159,7 @@ public class Movie {
 	joinColumns=
 	@JoinColumn(name="id_movie"),
 	inverseJoinColumns=
-	@JoinColumn(name="id_actors")
+	@JoinColumn(name="id_actor")
 			)
 	public List<Person> getActors() {
 		return actors;

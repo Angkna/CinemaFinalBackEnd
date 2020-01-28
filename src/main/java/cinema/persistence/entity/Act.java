@@ -1,24 +1,48 @@
 package cinema.persistence.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Act {
-	private Integer idMovie;
-	private Integer idPerson;
+		
+	private ActId id;
 	private String role;
+
 	
-	
-	
-	public Act(Integer idMovie, Integer idPerson, String role) {
+	public Act() {
 		super();
-		this.idMovie = idMovie;
-		this.idPerson = idPerson;
+	}
+	
+	public Act(String role) {
+		this(null, role);
+	}
+
+	public Act(ActId id, String role) {
+		super();
+		this.id = id;
 		this.role = role;
 	}
 
-	
+	@Id
+	public ActId getId() {
+		return id;
+	}
 
+	public void setId(ActId id) {
+		this.id = id;
+	}
 	
-	
-	
+	@Column(name = "role")
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	
 	
 }
