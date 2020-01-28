@@ -371,8 +371,6 @@ class TestMovie {
 		assertTrue(dataRead.stream().allMatch(m -> m.getAudiance() == Audiance.PG13));
 	}
 
-	
-
 	@Test
 	void testSaveMovieWithDirector() {
 		//Given
@@ -582,10 +580,19 @@ class TestMovie {
 						() -> assertFalse(moviesWithMel.contains(roi))
 						);
 	}
+	
+	@Test
+	void testAct() {
+		//Given
+		Person person = new Person ("Todd Phillips", LocalDate.of(1970,12,20));
+		entityManager.persist(person);   //already in cache
+		Movie movie = new Movie("Joker", 2019, 165);
+		movie.getActors().add(person);
+		entityManager.persist(movie);
+		entityManager.flush();
 
-
-
-
-
+		String role = "JeanJoker";
+		
+	}
 
 }

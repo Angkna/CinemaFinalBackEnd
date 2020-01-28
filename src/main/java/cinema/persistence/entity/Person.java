@@ -25,6 +25,7 @@ public class Person {
 	private LocalDate birthdate;
 	private List<Nationality> nationalities;
 	private String biography;
+	private List<Movie> movies;
 	
 	
 	///constructeur
@@ -48,13 +49,13 @@ public class Person {
 		this.birthdate = birthdate;
 		this.nationalities = new ArrayList<>();
 		this.biography = "";
+		this.movies = new ArrayList<>();
 	}
 
 	//getter setters
 	@Id										
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_persons")
-	
 	public Integer getIdPerson() {
 		return idPerson;
 	}
@@ -86,12 +87,9 @@ public class Person {
 	joinColumns=
 	@JoinColumn(name="id_person"),
 	inverseJoinColumns=
-	@JoinColumn(name="id_nationalities")
-			)
+	@JoinColumn(name="id_nationalities"))
 	public List<Nationality> getNationalities() {
-		return nationalities;
-		
-		
+		return nationalities;	
 	}
 
 	public void setNationalities(List<Nationality> nationalities) {
@@ -104,6 +102,15 @@ public class Person {
 
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+
+	@ManyToMany(mappedBy = "actors")
+	public List<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
 	}
 
 	//to string method

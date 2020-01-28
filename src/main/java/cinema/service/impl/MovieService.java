@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cinema.persistence.entity.Act;
 import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
@@ -226,6 +227,12 @@ public class MovieService implements IMovieService {
 		}
 		return exist.get();
 	}
+
+//	@Override
+//	public Act addAct(Movie movie, Person person, String role) {
+//		var exist = actRepository.findBy
+//		return null;
+//	}
 
 
 }
