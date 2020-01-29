@@ -167,23 +167,23 @@ public class MovieController {
 	}
 
 	
-	@GetMapping("/byActorName")
-	@ResponseBody
-	public Set<Movie> movieByActorsName(@RequestParam("a") String name) {
-		return movieService.getMovieByActorsName(name);
-	}
-	
-	@GetMapping("/byActorId")
-	@ResponseBody
-	public Set<Movie> moviebyActorsIdPerson(@RequestParam("a") int idActor) {
-		return movieService.getMovieByActorsIdPerson(idActor);				
-	}
-	
-	@GetMapping("/byActorNameEndingWith")
-	@ResponseBody
-	public Set<Movie> movieByActorsNameEndingWith(@RequestParam("a") String partialName) {
-		return movieService.getMovieByActorsNameEndingWith(partialName);
-	}
+//	@GetMapping("/byActorName")
+//	@ResponseBody
+//	public Set<Movie> movieByActorsName(@RequestParam("a") String name) {
+//		return movieService.getMovieByActorsName(name);
+//	}
+//	
+//	@GetMapping("/byActorId")
+//	@ResponseBody
+//	public Set<Movie> moviebyActorsIdPerson(@RequestParam("a") int idActor) {
+//		return movieService.getMovieByActorsIdPerson(idActor);				
+//	}
+//	
+//	@GetMapping("/byActorNameEndingWith")
+//	@ResponseBody
+//	public Set<Movie> movieByActorsNameEndingWith(@RequestParam("a") String partialName) {
+//		return movieService.getMovieByActorsNameEndingWith(partialName);
+//	}
 	
 	/**
 	 * Method: Post

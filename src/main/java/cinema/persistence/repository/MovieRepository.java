@@ -48,8 +48,8 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	Set<Movie> findByDirectorIdPerson(int idDirector);
 	
 	//actor
-	Set<Movie> findByActorsName (String name);
-	Set<Movie> findByActorsIdPerson (int idActor);
-	Set<Movie> findByActorsNameEndingWith(String name);
+//	Set<Movie> findByActorsName (String name);
+//	Set<Movie> findByActorsIdPerson (int idActor);
+//	Set<Movie> findByActorsNameEndingWith(String name);
 	
 }

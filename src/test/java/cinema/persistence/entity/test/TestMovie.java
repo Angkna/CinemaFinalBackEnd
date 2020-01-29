@@ -478,109 +478,109 @@ class TestMovie {
 		assertTrue(dataRead.stream().allMatch(m -> clint.equals(m.getDirector())));
 	}
 
-	@Test
-	void testFindByActorsName() {   	
-		var todd = new Person("Todd Phillips", LocalDate.of(1970, 12, 20));		
-		var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31));		
-		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5));		
-		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
-		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
-		var persons = List.of(todd, clint, brad, gene, morgan);
-		persons.forEach(entityManager::persist);
-
-		var joker = new Movie("Joker", 2019, 165, todd);	
-		var parasite = new Movie("Parasite",2019, 132);
-		var interstellar = new Movie("Interstellar",2014, 169);		
-		var granTorino= new Movie("Gran Torino", 2008, 116, clint);	
-		var impitoyable = new Movie("Impitoyable", 1992, 130, clint);			
-		var infwar = new Movie("Avengers: Infinity War", 2018, 149);
-		var end = new Movie("Avengers: Endgame", 2019, 181);				
-		var actors1 = List.of(morgan);
-		var actors2 = List.of(gene, clint);
-		var actors3 = List.of(gene, morgan, brad);
-		joker.setActors(actors1);
-		interstellar.setActors(actors2);
-		infwar.setActors(actors3);
-		var movies = List.of(joker, parasite, interstellar, granTorino, impitoyable, infwar, end);
-		movies.forEach(entityManager::persist);
-
-		String actorName = "Gene Hackman";
-		var dataRead = repoMovie.findByActorsName(actorName);
-		assertTrue(dataRead.stream()
-				.allMatch(m -> m.getActors().stream()	
-						.map(Person::getName)
-						.anyMatch(n -> n.equals(actorName))	
-						));
-	}
-
-	@Test
-	void testFindByActorsIdPerson() {
-		var todd = new Person("Todd Phillips", LocalDate.of(1970, 12, 20));		
-		var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31));		
-		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5));		
-		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
-		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
-		var persons = List.of(todd, clint, brad, gene, morgan);
-		persons.forEach(entityManager::persist);
-
-		var joker = new Movie("Joker", 2019, 165, todd);	
-		var parasite = new Movie("Parasite",2019, 132);
-		var interstellar = new Movie("Interstellar",2014, 169);		
-		var granTorino= new Movie("Gran Torino", 2008, 116, clint);	
-		var impitoyable = new Movie("Impitoyable", 1992, 130, clint);			
-		var infwar = new Movie("Avengers: Infinity War", 2018, 149);
-		var end = new Movie("Avengers: Endgame", 2019, 181);				
-		var actors1 = List.of(morgan);
-		var actors2 = List.of(gene, clint);
-		var actors3 = List.of(gene, morgan, brad);
-		joker.setActors(actors1);
-		interstellar.setActors(actors2);
-		infwar.setActors(actors3);
-		var movies = List.of(joker, parasite, interstellar, granTorino, impitoyable, infwar, end);
-		movies.forEach(entityManager::persist);
-
-		var idActor = clint.getIdPerson();
-		var dataRead = repoMovie.findByActorsIdPerson(idActor);
-		assertTrue(dataRead.stream()
-				.allMatch(m -> m.getActors().stream()	
-						.map(Person::getIdPerson)
-						.anyMatch(n -> n.equals(idActor))	
-						));
-	}
-
-	@Test
-	void testfindByActorsNameEndingWith (){
-		//given
-		var joker = new Movie("Joker", 2019, 165);
-		var roi = new Movie ("Le Roi Lion", 1994, 166);
-		var parasite = new Movie("Parasite", 2019, 132);
-		var mad = new Movie("Mad Max", 1987);
-		var arme = new Movie ("L'arme Fatale", 1978);
-		List<Movie> movies = List.of(joker, roi, parasite, mad, arme);
-		movies.forEach(entityManager::persist);
-
-		var mel = new Person("Mel Gibson");
-		var whoopi = new Person("Whoopi Golberg");
-		var danny = new Person("Danny Glover")
-				;		entityManager.persist(mel);
-				entityManager.persist(whoopi);
-				entityManager.persist(danny);
-
-				roi.getActors().add(whoopi);
-				mad.getActors().add(mel);
-				Collections.addAll(arme.getActors(), mel, danny);
-				entityManager.flush();
-				//when
-				var moviesWithMel = repoMovie.findByActorsNameEndingWith("Gibson");
-
-				//then
-				assertAll(
-						() -> assertTrue(moviesWithMel.contains(mad)),
-						() -> assertTrue(moviesWithMel.contains(arme)),
-						() -> assertFalse(moviesWithMel.contains(roi))
-						);
-	}
-	
+//	@Test
+//	void testFindByActorsName() {   	
+//		var todd = new Person("Todd Phillips", LocalDate.of(1970, 12, 20));		
+//		var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31));		
+//		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5));		
+//		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
+//		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
+//		var persons = List.of(todd, clint, brad, gene, morgan);
+//		persons.forEach(entityManager::persist);
+//
+//		var joker = new Movie("Joker", 2019, 165, todd);	
+//		var parasite = new Movie("Parasite",2019, 132);
+//		var interstellar = new Movie("Interstellar",2014, 169);		
+//		var granTorino= new Movie("Gran Torino", 2008, 116, clint);	
+//		var impitoyable = new Movie("Impitoyable", 1992, 130, clint);			
+//		var infwar = new Movie("Avengers: Infinity War", 2018, 149);
+//		var end = new Movie("Avengers: Endgame", 2019, 181);				
+//		var actors1 = List.of(morgan);
+//		var actors2 = List.of(gene, clint);
+//		var actors3 = List.of(gene, morgan, brad);
+//		joker.setActors(actors1);
+//		interstellar.setActors(actors2);
+//		infwar.setActors(actors3);
+//		var movies = List.of(joker, parasite, interstellar, granTorino, impitoyable, infwar, end);
+//		movies.forEach(entityManager::persist);
+//
+//		String actorName = "Gene Hackman";
+//		var dataRead = repoMovie.findByActorsName(actorName);
+//		assertTrue(dataRead.stream()
+//				.allMatch(m -> m.getActors().stream()	
+//						.map(Person::getName)
+//						.anyMatch(n -> n.equals(actorName))	
+//						));
+//	}
+//
+//	@Test
+//	void testFindByActorsIdPerson() {
+//		var todd = new Person("Todd Phillips", LocalDate.of(1970, 12, 20));		
+//		var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31));		
+//		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5));		
+//		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
+//		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
+//		var persons = List.of(todd, clint, brad, gene, morgan);
+//		persons.forEach(entityManager::persist);
+//
+//		var joker = new Movie("Joker", 2019, 165, todd);	
+//		var parasite = new Movie("Parasite",2019, 132);
+//		var interstellar = new Movie("Interstellar",2014, 169);		
+//		var granTorino= new Movie("Gran Torino", 2008, 116, clint);	
+//		var impitoyable = new Movie("Impitoyable", 1992, 130, clint);			
+//		var infwar = new Movie("Avengers: Infinity War", 2018, 149);
+//		var end = new Movie("Avengers: Endgame", 2019, 181);				
+//		var actors1 = List.of(morgan);
+//		var actors2 = List.of(gene, clint);
+//		var actors3 = List.of(gene, morgan, brad);
+//		joker.setActors(actors1);
+//		interstellar.setActors(actors2);
+//		infwar.setActors(actors3);
+//		var movies = List.of(joker, parasite, interstellar, granTorino, impitoyable, infwar, end);
+//		movies.forEach(entityManager::persist);
+//
+//		var idActor = clint.getIdPerson();
+//		var dataRead = repoMovie.findByActorsIdPerson(idActor);
+//		assertTrue(dataRead.stream()
+//				.allMatch(m -> m.getActors().stream()	
+//						.map(Person::getIdPerson)
+//						.anyMatch(n -> n.equals(idActor))	
+//						));
+//	}
+//
+//	@Test
+//	void testfindByActorsNameEndingWith (){
+//		//given
+//		var joker = new Movie("Joker", 2019, 165);
+//		var roi = new Movie ("Le Roi Lion", 1994, 166);
+//		var parasite = new Movie("Parasite", 2019, 132);
+//		var mad = new Movie("Mad Max", 1987);
+//		var arme = new Movie ("L'arme Fatale", 1978);
+//		List<Movie> movies = List.of(joker, roi, parasite, mad, arme);
+//		movies.forEach(entityManager::persist);
+//
+//		var mel = new Person("Mel Gibson");
+//		var whoopi = new Person("Whoopi Golberg");
+//		var danny = new Person("Danny Glover")
+//				;		entityManager.persist(mel);
+//				entityManager.persist(whoopi);
+//				entityManager.persist(danny);
+//
+//				roi.getActors().add(whoopi);
+//				mad.getActors().add(mel);
+//				Collections.addAll(arme.getActors(), mel, danny);
+//				entityManager.flush();
+//				//when
+//				var moviesWithMel = repoMovie.findByActorsNameEndingWith("Gibson");
+//
+//				//then
+//				assertAll(
+//						() -> assertTrue(moviesWithMel.contains(mad)),
+//						() -> assertTrue(moviesWithMel.contains(arme)),
+//						() -> assertFalse(moviesWithMel.contains(roi))
+//						);
+//	}
+//	
 	@Test
 	void testAct() {
 		//Given

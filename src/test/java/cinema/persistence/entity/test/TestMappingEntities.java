@@ -15,10 +15,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import cinema.persistence.entity.Act;
+import cinema.persistence.entity.ActId;
 import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+import cinema.persistence.repository.ActRepository;
 import cinema.persistence.repository.GenreRepository;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
@@ -38,6 +41,9 @@ class TestMappingEntities {
 	MovieRepository repoMovies;
 	@Autowired
 	GenreRepository repoGenres;
+	
+	@Autowired
+	ActRepository actRepository;
 	
 	
 	@Rollback(false)
@@ -131,10 +137,10 @@ class TestMappingEntities {
 		marvel.setAudiance(Audiance.PG);
 		bad.setAudiance(Audiance.PG13);
 		
-		//biography
-		brie.setBiography("Brie Larson has built an impressive career as an acclaimed television actress, rising feature film star and emerging recording artist. A native of Sacramento, Brie started studying drama at the early age of 6, as the youngest student ever to attend the American Conservatory Theater in San Francisco");
-		brad.setBiography("Bradley Charles Cooper was born on January 5, 1975 in Philadelphia, Pennsylvania. His mother, Gloria (Campano), is of Italian descent, and worked for a local NBC station. His father, Charles John Cooper, who was of Irish descent, was a stockbroker.");
-		gene.setBiography("Eugene Allen Hackman was born in San Bernardino, California, the son of Ann-nnsylvania Dutch (German), English, and Scottish ancestry, partly by way of Canada, where his mother was born.");
+//		//biography
+//		brie.setBiography("Brie Larson has built an impressive career as an acclaimed television actress, rising feature film star and emerging recording artist. A native of Sacramento, Brie started studying drama at the early age of 6, as the youngest student ever to attend the American Conservatory Theater in San Francisco");
+//		brad.setBiography("Bradley Charles Cooper was born on January 5, 1975 in Philadelphia, Pennsylvania. His mother, Gloria (Campano), is of Italian descent, and worked for a local NBC station. His father, Charles John Cooper, who was of Irish descent, was a stockbroker.");
+//		gene.setBiography("Eugene Allen Hackman was born in San Bernardino, California, the son of Ann-nnsylvania Dutch (German), English, and Scottish ancestry, partly by way of Canada, where his mother was born.");
 		
 		
 		movies.forEach(repoMovies::save);
@@ -152,6 +158,7 @@ class TestMappingEntities {
 			var tom = repoPersons.findByName("Tom Hanks")
 							.stream().findFirst().get();
 			ap13.setActors(List.of(tom, kevin));
+			repoMovies.save(ap13);
 			repoMovies.flush();
 			//pentagon papers
 			var paper = repoMovies.findByTitle("Pentagon Papers")
@@ -163,7 +170,7 @@ class TestMappingEntities {
 			paper.setActors(List.of(tom, meryl));
 			repoMovies.flush();
 			//mamma mia
-			var mamma = repoMovies.findByTitle("Mamma Mia")
+			var mamma = repoMovies.findByTitle("Mamma Mia!")
 					.stream().findFirst().get();
 			var colin = repoPersons.findByName("Colin Firth")
 					.stream().findFirst().get();
@@ -180,14 +187,14 @@ class TestMappingEntities {
 			//ocean8
 			var ocean = repoMovies.findByTitle("Ocean s 8")
 					.stream().findFirst().get();
-			var kate = repoPersons.findByName("Kate Blanchett")
+			var kate = repoPersons.findByName("Cate Blanchett")
 					.stream().findFirst().get();
 			ocean.setActors(List.of(kate, helena));
 			repoMovies.flush();
 			//SDA
 			var anneaux = repoMovies.findByTitle("Le seigneur des anneaux")
 					.stream().findFirst().get();
-			var viggo = repoPersons.findByName("Vigo Mortensen")
+			var viggo = repoPersons.findByName("Viggo Mortensen")
 					.stream().findFirst().get();
 			anneaux.setActors(List.of(kate, viggo));
 			repoMovies.flush();
@@ -332,7 +339,15 @@ class TestMappingEntities {
 		repoMovies.flush();
 	}
 	
-	
+	@Rollback(false)
+	@Test
+	void testAddAct() {
+		var movie = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
+		var person = repoPersons.findByName("Morgan Freeman").stream().findFirst().get();
+		var act = new Act(movie, person, "Gérard Bouchard");
+		actRepository.save(act);
+		System.out.println(act);
+	}
 }
 
 	

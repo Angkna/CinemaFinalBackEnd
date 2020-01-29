@@ -12,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity				//sa target n'est que des classes
 @Table(name = "movies")			//nom de la table
@@ -32,6 +34,9 @@ public class Movie {
 	private Audiance audiance;
 	private Person director;
 	private List<Person> actors;
+	
+	@OneToMany(mappedBy = "person")
+	private List<Act> acts = new ArrayList<Act>();
 
 
 	public Movie() {			//constructeur vide
@@ -154,13 +159,14 @@ public class Movie {
 	}
 
 	//actors
-	@ManyToMany //(fetch = FetchType.EAGER)
-	@JoinTable(name="act",
-	joinColumns=
-	@JoinColumn(name="id_movie"),
-	inverseJoinColumns=
-	@JoinColumn(name="id_actor")
-			)
+//	@ManyToMany //(fetch = FetchType.EAGER)
+//	@JoinTable(name="act",
+//	joinColumns=
+//	@JoinColumn(name="id_movie"),
+//	inverseJoinColumns=
+//	@JoinColumn(name="id_actor")
+//			)
+	@Transient
 	public List<Person> getActors() {
 		return actors;
 	}

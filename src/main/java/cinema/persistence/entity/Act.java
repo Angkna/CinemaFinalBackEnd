@@ -1,40 +1,50 @@
 package cinema.persistence.entity;
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 @Entity
 public class Act {
-		
-	private ActId id;
+	
+	@EmbeddedId
+	private ActId id = new ActId();
+	
+	@ManyToOne
+	@MapsId("movieId")
+	@JoinColumn(name = "id_movie")
+	private Movie movie;
+	
+	@ManyToOne
+	@MapsId("personId")
+	@JoinColumn(name = "id_actor")
+	private Person person;
+	
 	private String role;
-
 	
 	public Act() {
 		super();
 	}
-	
-	public Act(String role) {
-		this(null, role);
-	}
 
-	public Act(ActId id, String role) {
+	public Act(ActId id, Movie movie, Person person, String role) {
 		super();
 		this.id = id;
+		this.movie = movie;
+		this.person = person;
 		this.role = role;
 	}
-
-	@Id
-	public ActId getId() {
-		return id;
-	}
-
-	public void setId(ActId id) {
-		this.id = id;
+	
+	public Act(Movie movie, Person person, String role) {
+		this(new ActId(movie.getIdMovie(),person.getIdPerson()), movie, person, role);
 	}
 	
-	@Column(name = "role")
+	public Act(Movie movie, Person person) {
+		this(new ActId(movie.getIdMovie(),person.getIdPerson()), movie, person, null);
+	}
+
+	
 	public String getRole() {
 		return role;
 	}
@@ -43,8 +53,10 @@ public class Act {
 		this.role = role;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "Act [id=" + id + ", movie=" + movie + ", person=" + person + ", role=" + role + "]";
+	}
 }
 
 

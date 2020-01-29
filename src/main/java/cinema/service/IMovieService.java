@@ -43,9 +43,9 @@ public interface IMovieService {
 	Set<Movie> getMovieByDirectorNameEndingWith(String name);
 	Set<Movie> getMovieByDirectorId(int idDirector);
 	
-	Set<Movie> getMovieByActorsName(String name);
-	Set<Movie> getMovieByActorsIdPerson(int idActor);
-	Set<Movie> getMovieByActorsNameEndingWith(String name);
+//	Set<Movie> getMovieByActorsName(String name);
+//	Set<Movie> getMovieByActorsIdPerson(int idActor);
+//	Set<Movie> getMovieByActorsNameEndingWith(String name);
 	
 	
 	//post-put
@@ -59,6 +59,7 @@ public interface IMovieService {
 	//delete
 	Optional<Movie> deleteMovie (int idMovie);
 	
-//	//test act
-//	Act addAct (Movie movie, Person person, String role);
+	//test act
+	Optional<Act> getActByMovieAndPerson (Movie movie, Person person);
+	Act addAct (Movie movie, Person person, String role);
 }

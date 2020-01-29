@@ -13,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity				
@@ -26,6 +28,9 @@ public class Person {
 	private List<Nationality> nationalities;
 	private String biography;
 	private List<Movie> movies;
+	
+	@OneToMany(mappedBy = "person")
+	private List<Act> acts = new ArrayList<Act>();
 	
 	
 	///constructeur
@@ -55,7 +60,7 @@ public class Person {
 	//getter setters
 	@Id										
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_persons")
+	@Column(name = "id_person")
 	public Integer getIdPerson() {
 		return idPerson;
 	}
@@ -104,7 +109,8 @@ public class Person {
 		this.biography = biography;
 	}
 
-	@ManyToMany(mappedBy = "actors")
+//	@ManyToMany(mappedBy = "actors")
+	@Transient
 	public List<Movie> getMovies() {
 		return movies;
 	}

@@ -14,6 +14,7 @@ import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+import cinema.persistence.repository.ActRepository;
 import cinema.persistence.repository.GenreRepository;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
@@ -31,6 +32,9 @@ public class MovieService implements IMovieService {
 	PersonRepository personRepository;
 	@Autowired
 	GenreRepository genreRepository;
+	@Autowired
+	ActRepository actRepository;
+
 
 	@Override
 	public List<Movie> getAllMovies() {
@@ -139,20 +143,20 @@ public class MovieService implements IMovieService {
 					.orElseGet( () -> Collections.emptySet());
 	}
 
-	@Override
-	public Set<Movie> getMovieByActorsName(String name) {
-		return movieRepository.findByActorsName(name);
-	}
-
-	@Override
-	public Set<Movie> getMovieByActorsIdPerson(int idActor) {
-		return movieRepository.findByActorsIdPerson(idActor);
-	}
-
-	@Override
-	public Set<Movie> getMovieByActorsNameEndingWith(String name) {
-		return movieRepository.findByActorsNameEndingWith(name);
-	}
+//	@Override
+//	public Set<Movie> getMovieByActorsName(String name) {
+//		return movieRepository.findByActorsName(name);
+//	}
+//
+//	@Override
+//	public Set<Movie> getMovieByActorsIdPerson(int idActor) {
+//		return movieRepository.findByActorsIdPerson(idActor);
+//	}
+//
+//	@Override
+//	public Set<Movie> getMovieByActorsNameEndingWith(String name) {
+//		return movieRepository.findByActorsNameEndingWith(name);
+//	}
 
 	@Override
 	public Movie addMovie(Movie movie) {
@@ -228,11 +232,16 @@ public class MovieService implements IMovieService {
 		return exist.get();
 	}
 
-//	@Override
-//	public Act addAct(Movie movie, Person person, String role) {
-//		var exist = actRepository.findBy
-//		return null;
-//	}
+	@Override
+	public Act addAct(Movie movie, Person person, String role) {
+		//var idActExist = actRepository.findByMovieAndPerson(movie, person);
+		return null;
+	}
+
+	@Override
+	public Optional<Act> getActByMovieAndPerson(Movie movie, Person person) {
+		return actRepository.findByMovieAndPerson(movie, person);
+	}
 
 
 }
