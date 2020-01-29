@@ -222,30 +222,42 @@ class TestMappingEntities {
 							end,aven,marvel,ultron, pouvoirs, ap13, paper, mamma, roi, ocean, anneaux,
 							fantastic
 							);
+		movies.forEach(repoMovies::save);
+		repoMovies.flush();
 		//ajout acteur aux films
-		//apollon13
-		ap13.setActors(List.of(tom, kevin));
-	
-	
-		//pentagon papers
-		paper.setActors(List.of(tom, meryl));
-	
-		//mamma mia
-		mamma.setActors(List.of(meryl, colin));
 		
+//		var movie = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
+//		var person = repoPersons.findByName("Morgan Freeman").stream().findFirst().get();
+//		var act = new Act(movie, person, "Gérard Bouchard");
+//		actRepository.save(act);
+		
+		//apollon13
+		var act = new Act(ap13, tom);
+		var act2 = new Act(ap13, kevin);
+		//entagon papers
+		var act3 = new Act(paper, tom);
+		var act4 = new Act(paper, meryl);
+		//mamma mia
+		var act5 = new Act(mamma, meryl);
+		var act6 = new Act(mamma, colin);
 		// discours roi
-		roi.setActors(List.of(colin, helena));
+		var act7 = new Act(roi, colin);
+		var act8 = new Act(roi, helena);
 		
 		//ocean8
-		ocean.setActors(List.of(kate, helena));
-		
+		var act9 = new Act(ocean, kate);
+		var act10 = new Act(ocean, helena);
 		//SDA
-		anneaux.setActors(List.of(kate, viggo));
-		
+		var act11 = new Act(anneaux, kate);
+		var act12 = new Act(anneaux, viggo);
 		//captainfantastic
-		fantastic.setActors(List.of(franck, viggo));
+		var act13 = new Act(fantastic, franck);
+		var act14 = new Act(fantastic, viggo);
 	
-		movies.forEach(repoMovies::save);
+		
+		var acttotal =  List.of(act,act2,act3,act4,act5,act6,act7,act8,act9,act9,act10,act11,act12,act13,act14);
+	
+		acttotal.forEach(actRepository::save);
 		repoMovies.flush();
 		//test
 	//START//
