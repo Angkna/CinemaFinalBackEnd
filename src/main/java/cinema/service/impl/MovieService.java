@@ -77,8 +77,11 @@ public class MovieService implements IMovieService {
 	}
 
 	@Override
-	public Set<Movie> getMovieByYearBetween(int year, int year2) {
-		return movieRepository.findByYearBetween(year, year2);
+	public Set<Movie> getMovieByYearBetween(int year1, int year2) {
+		if (year2 <= year1) {
+			return movieRepository.findByYearBetween(year2, year1);
+		}
+	return movieRepository.findByYearBetween(year1, year2);
 	}
 
 	@Override
@@ -93,7 +96,10 @@ public class MovieService implements IMovieService {
 
 	@Override
 	public Set<Movie> getMovieByDurationBetween(int duration1, int duration2) {
-		return movieRepository.findByDurationBetween(duration1, duration2);
+		if (duration2 < duration1) {
+			return movieRepository.findByDurationBetween(duration2, duration1);
+		}
+	return movieRepository.findByDurationBetween(duration1, duration2);
 	}
 
 	@Override
