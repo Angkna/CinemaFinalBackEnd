@@ -232,38 +232,38 @@ class TestMappingEntities {
 //		actRepository.save(act);
 		
 		//apollon13
-		var act = new Act(ap13, tom);
-		var act2 = new Act(ap13, kevin);
+		var act = new Act(ap13, tom, "Jim Lovell");
+		var act2 = new Act(ap13, kevin, "Jack Wigert");
 		//entagon papers
-		var act3 = new Act(paper, tom);
-		var act4 = new Act(paper, meryl);
+		var act3 = new Act(paper, tom, "Ben Bradlle");
+		var act4 = new Act(paper, meryl, "Kay Graham");
 		//mamma mia
-		var act5 = new Act(mamma, meryl);
-		var act6 = new Act(mamma, colin);
+		var act5 = new Act(mamma, meryl, "Donna");
+		var act6 = new Act(mamma, colin, "Harry Bright");
 		// discours roi
-		var act7 = new Act(roi, colin);
-		var act8 = new Act(roi, helena);
+		var act7 = new Act(roi, colin, "George Berthie");
+		var act8 = new Act(roi, helena, "Helizabeth");
 		
 		//ocean8
-		var act9 = new Act(ocean, kate);
-		var act10 = new Act(ocean, helena);
+		var act9 = new Act(ocean, kate, "Lou Miller");
+		var act10 = new Act(ocean, helena, "Rose Well");
 		//SDA
-		var act11 = new Act(anneaux, kate);
-		var act12 = new Act(anneaux, viggo);
-		//captainfantastic
-		var act13 = new Act(fantastic, franck);
-		var act14 = new Act(fantastic, viggo);
+		var act11 = new Act(anneaux, kate, "Galadriel");
+		var act12 = new Act(anneaux, viggo , "Aragorn");
+		//captain-fantastic
+		var act13 = new Act(fantastic, franck, "Jack");
+		var act14 = new Act(fantastic, viggo, "Ben");
 	
 		
 		var acttotal =  List.of(act,act2,act3,act4,act5,act6,act7,act8,act9,act9,act10,act11,act12,act13,act14);
-	
-		acttotal.forEach(actRepository::save);
-		repoMovies.flush();
+	}
+//		acttotal.forEach(actRepository::save);
+//		repoMovies.flush();
 		//test
 	//START//
 //		var filmActeurDegresInconnu = repoMovies.findByActorsNameEndingWith("Hanks");
 //		var filmDeKevin = repoMovies.findByActorsNameEndingWith("Bacon");
-//	
+	
 //		var idDeKevin = new ArrayList<>();
 //		 filmDeKevin.stream()
 //				.mapToInt(Movie::getIdMovie)
@@ -278,26 +278,26 @@ class TestMappingEntities {
 //					.forEach(i -> idDeInconnu.add(i));
 //		
 //		System.out.println("id des films de inconnus " +  idDeInconnu);	 	
-			 	
-			 	
-//		//Comparer et stocker les résultats dans Liste de comparaison
+//			 	
+//			 	
+////		//Comparer et stocker les résultats dans Liste de comparaison
 //	     ArrayList<Object> listeComparaison = new ArrayList<Object>();
 //	     for(Object o:idDeInconnu ){
 //	    	 if(idDeKevin.contains(o)) {
 //	    		 listeComparaison.add("");
 //	    	 		System.out.println("1 degrès");
-////	    		 	if (listecomparaison.i
-////	    		 	break;	
+//	    	//	 	if (listecomparaison.i
+//	    		 	break;	
 //	     } else {
 //	    		 System.out.println("pas de  degrès");
 //
 //	     }
 //	     }
 //	     	System.out.println("liste de Comparaison = " + listeComparaison);	
-	//END//	
+	
 	
 //		////////////dire que si c'est nul alors on a un degres 
-//	    //for(Object n:listeComparaison ){
+	    //for(Object n:listeComparaison ){
 //	    	 	if(listeComparaison.isEmpty()
 //	    	 		 System.out.println("1 degrès"));
 //	     }
@@ -307,14 +307,14 @@ class TestMappingEntities {
 //	    	 if (listisEmpty()  
 //	    	 System.out.println("1 degrès"));
 //	     } else {
-//	    	 System.out.println("fuck pas de degrès");
-//	     }
+//	    	 System.out.println(" pas de degrès");
+	//     }
 		
-		
+		//END//	
 		
 			
 		
-	}
+	//}
 	
 	
 		
