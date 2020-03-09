@@ -27,10 +27,9 @@ public class Person {
 	private LocalDate birthdate;
 	private List<Nationality> nationalities;
 	private String biography;
-	private List<Movie> movies;
 	
 	@OneToMany(mappedBy = "person")
-	private List<Act> acts = new ArrayList<Act>();
+	private List<Movie> movies;
 	
 	
 	///constructeur

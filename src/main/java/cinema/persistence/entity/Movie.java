@@ -35,11 +35,9 @@ public class Movie {
 	private String synopsis;
 	private Audiance audiance;
 	private Person director;
-	private List<Person> actors;
-
 	
 	@OneToMany(mappedBy = "person")
-	private List<Act> acts = new ArrayList<Act>();
+	private List<Person> actors;
 
 	private List<User> likedByUsers;
 
