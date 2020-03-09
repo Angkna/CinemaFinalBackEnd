@@ -16,10 +16,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import cinema.persistence.entity.Audiance;
-import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
-import cinema.persistence.repository.GenreRepository;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
 
@@ -36,8 +34,6 @@ class TestMappingEntities {
 	PersonRepository repoPersons;
 	@Autowired
 	MovieRepository repoMovies;
-	@Autowired
-	GenreRepository repoGenres;
 	
 	
 	@Rollback(false)
@@ -59,21 +55,22 @@ class TestMappingEntities {
 		var kate = new Person ("Cate Blanchett");
 		var viggo = new Person ("Viggo Mortensen");
 		var franck = new Person ("Frank Langella");
+		var nolan = new Person ("Christopher Nolan", LocalDate.of(1970, 7, 30));
 		
 		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan, brie, kevin, tom, meryl, colin, helena,
-									kate, viggo, franck
+									kate, viggo, franck, nolan
 									);
 		persons.forEach(repoPersons::save);
 		
 		//genre
-		var horror = new Genre("horror");		
-		var action = new Genre("action");
-		var fantasy = new Genre("fantasy");
-		var adventure = new Genre("adventure");
-		var animation = new Genre("animation");
-		var amour = new Genre ("amour");
-		var genres = List.of(horror, action, fantasy, adventure, animation, amour);
-		genres.forEach(repoGenres::save);
+		var horror = "horror";		
+		var action = "action";
+		var fantasy = "fantasy";
+		var adventure = "adventure";
+		var animation = "animation";
+		var amour = "amour";
+//		var genres = List.of(horror, action, fantasy, adventure, animation, amour);
+//		genres.forEach(repoGenres::save);
 		
 		
 		//films
@@ -143,8 +140,7 @@ class TestMappingEntities {
 			var movies = repoMovies.findByTitleContainingIgnoreCase("Interstellar");
 			if (movies.size()>0) {
 					var interstellar = movies.stream().findFirst().get();
-					var chris =  new Person ("Christopher Nolan", LocalDate.of(1970, 7, 30));
-					repoPersons.save(chris);
+					var chris =  repoPersons.findByName("Christopher Nolan").stream().findFirst().get();
 					interstellar.setDirector(chris);
 			}
 	}

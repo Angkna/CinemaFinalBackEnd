@@ -3,7 +3,9 @@ package cinema.persistence.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,12 +28,13 @@ public class Movie {
 	private String title;
 	private Integer year; 			 //pour ne pas s'embeter on met en int en objet
 	private Integer duration; 		//pour les champs NON obligatoire on passe par le objet de int :Integer
-	private List<Genre> genres;
+	private List<String> genres;
 	private Double rating; 
 	private String synopsis;
 	private Audiance audiance;
 	private Person director;
 	private List<Person> actors;
+	private List<User> likedByUsers;
 
 
 	public Movie() {			//constructeur vide
@@ -60,7 +63,7 @@ public class Movie {
 		this.title = title;
 		this.year = year;
 		this.duration = duration;
-		this.genres = new ArrayList<Genre>();
+		this.genres = new ArrayList<String>();
 		this.rating = rating;
 		this.synopsis = "";
 		this.audiance = null;
@@ -106,15 +109,17 @@ public class Movie {
 		this.duration = duration;
 	}
 	
-	@ManyToMany
-	@JoinTable(name="genrementation",
-			joinColumns = @JoinColumn(name="id_movie"),
-			inverseJoinColumns = @JoinColumn(name="id_genre"))
-	public List<Genre> getGenres() {
+//	@ManyToMany
+//	@JoinTable(name="genrementation",
+//			joinColumns = @JoinColumn(name="id_movie"),
+//			inverseJoinColumns = @JoinColumn(name="id_genre"))
+	@ElementCollection
+	@CollectionTable(joinColumns = @JoinColumn(name="id_movie"))
+	public List<String> getGenres() {
 		return genres;
 	}
-
-	public void setGenres(List<Genre> genres) {
+	
+	public void setGenres(List<String> genres) {
 		this.genres = genres;
 	}
 
@@ -169,6 +174,14 @@ public class Movie {
 		this.actors = actors;
 	}
 
+	@ManyToMany(mappedBy = "movieLiked")
+	public List<User> getLikedByUsers() {
+		return likedByUsers;
+	}
+
+	public void setLikedByUsers(List<User> likedByUsers) {
+		this.likedByUsers = likedByUsers;
+	}
 
 	//to string method
 	@Override

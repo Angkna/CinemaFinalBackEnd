@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 
 @Entity				
-	@Table(name = "persons")		
+@Table(name = "persons")		
 public class Person {
 
 	private Integer idPerson;

@@ -1,15 +1,20 @@
 package cinema.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cinema.dto.PersonFull;
 import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
+import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.NationalityRepository;
 import cinema.persistence.repository.PersonRepository;
 import cinema.service.IPersonService;
@@ -20,6 +25,10 @@ public class PersonService implements IPersonService {
 
 	@Autowired
 	PersonRepository personRepository;
+	@Autowired
+	MovieRepository movieRepository;
+	@Autowired
+	ModelMapper mapper;
 	
 	@Autowired
 	NationalityRepository nationalityRepository;
@@ -79,8 +88,21 @@ public class PersonService implements IPersonService {
 		}
 		return personSave;
 	}
-	
-	
-	
+
+	@Override
+	public Optional<PersonFull> getMovieDirector(int idMovie) {
+		return movieRepository.findById(idMovie)
+				.map(m -> Objects.isNull(m.getDirector()) ? null : mapper.map(m.getDirector(), PersonFull.class));
+	}
+
+	@Override
+	public List<PersonFull> getMovieActors(int idMovie) {
+		return movieRepository.findById(idMovie)
+				.map(m -> m.getActors().stream()
+						.map(a -> mapper.map(a, PersonFull.class))
+						.collect(Collectors.toList())
+						)
+				.orElse(List.of());
+	}
 	
 }
