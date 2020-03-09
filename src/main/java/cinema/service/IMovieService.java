@@ -5,61 +5,64 @@ import java.util.Optional;
 import java.util.Set;
 
 import cinema.persistence.entity.Act;
+import cinema.dto.MovieFull;
+import cinema.dto.MovieLight;
 import cinema.persistence.entity.Audiance;
-import cinema.persistence.entity.Genre;
-import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 
 public interface IMovieService {
 	
 	//get
-	List<Movie> getAllMovies();
-	Optional<Movie> getMovieById(int idMovie);
+	List<MovieLight> getAllMovies();
+	Optional<MovieFull> getMovieById(int idMovie);
 	
-	Set<Movie> getMovieByTitle(String title);
-	Set<Movie> getMovieByTitleContainingIgnoreCase(String title);
-	Set<Movie> getMovieByTitleAndYear(String title,int Year);
+	Set<MovieLight> getMovieByTitle(String title);
+	Set<MovieLight> getMovieByTitleContainingIgnoreCase(String title);
+	Set<MovieLight> getMovieByTitleAndYear(String title,int Year);
+	Set<MovieLight> getMovieByTitleContainingIgnoreCaseAndYear(String title,int Year);
 	
-	Set<Movie> getMovieByYear(int year);
-	Set<Movie> getMovieByYearLessThan(int year);
-	Set<Movie> getMovieByYearGreaterThan(int year);
-	Set<Movie> getMovieByYearBetween(int year1,int year2);
-	Set<Movie> getMovieByYearAndTitleAndDuration(int year, String name, int duration);
+	Set<MovieLight> getMovieByYear(int year);
+	Set<MovieLight> getMovieByYearLessThan(int year);
+	Set<MovieLight> getMovieByYearGreaterThan(int year);
+	Set<MovieLight> getMovieByYearBetween(int year1,int year2);
+	Set<MovieLight> getMovieByYearAndTitleAndDuration(int year, String name, int duration);
 	
-	Set<Movie> getMovieByDurationGreaterThan(int duration);
-	Set<Movie> getMovieByDurationBetween(int duration1, int duration2);
-	Set<Movie> getMovieByDurationLessThanEqual(int duration);
+	Set<MovieLight> getMovieByDurationGreaterThan(int duration);
+	Set<MovieLight> getMovieByDurationBetween(int duration1, int duration2);
+	Set<MovieLight> getMovieByDurationLessThanEqual(int duration);
 	
-	Set<Movie> getMovieByGenresGenreIgnoreCase(String genre);
+	Set<MovieLight> getMovieByGenresIgnoreCase(String genre);
 	
-	Set<Movie> getMovieByRatingGreaterThanEqual(double rating);
+	Set<MovieLight> getMovieByRatingGreaterThanEqual(double rating);
 	
-	Set<Movie> getMovieBySynopsisContaining(String recherche);
+	Set<MovieLight> getMovieBySynopsisContaining(String recherche);
 	
-	Set<Movie> getMovieByAudiance(Audiance audiance);
+	Set<MovieLight> getMovieByAudiance(Audiance audiance);
 	
-	Set<Movie> getMovieByDirector(Person person);
-	Set<Movie> getMovieByDirectorName(String name);
-	Set<Movie> getMovieByDirectorNameEndingWith(String name);
-	Set<Movie> getMovieByDirectorId(int idDirector);
+	Set<MovieLight> getMovieByDirector(Person person);
+	Set<MovieLight> getMovieByDirectorName(String name);
+	Set<MovieLight> getMovieByDirectorNameEndingWith(String name);
+	Set<MovieLight> getMovieByDirectorId(int idDirector);
 	
-//	Set<Movie> getMovieByActorsName(String name);
-//	Set<Movie> getMovieByActorsIdPerson(int idActor);
-//	Set<Movie> getMovieByActorsNameEndingWith(String name);
+
+//	Set<MovieLight> getMovieByActorsName(String name);
+//	Set<MovieLight> getMovieByActorsIdPerson(int idActor);
+//	Set<MovieLight> getMovieByActorsNameEndingWith(String name);
 	
 	
 	//post-put
-	Movie addMovie(Movie movie);
-	Genre addGenre(String genre);
-	Optional<Movie> modifyMovie (Movie movie);
-	Optional<Movie> addActor (int idActor, int idMovie);
-	Optional<Movie> setDirector (int idDirector, int idMovie);
-	Optional<Movie> addGenreToMovie (String genre, int idMovie);
-	
-	//delete
-	Optional<Movie> deleteMovie (int idMovie);
+	MovieFull addMovie(MovieFull movie);
+	//String addGenre(String genre); //?
+	Optional<MovieFull> modifyMovie (MovieFull movie);
+	Optional<MovieFull> addActor (int idActor, int idMovie);
+	Optional<MovieFull> setDirector (int idDirector, int idMovie);
+	//Optional<MovieFull> addGenreToMovie (String genre, int idMovie);//?
 	
 	//test act
-	Optional<Act> getActByMovieAndPerson (Movie movie, Person person);
-	Act addAct (Movie movie, Person person, String role);
+	//Optional<Act> getActByMovieAndPerson (Movie movie, Person person);
+	//Act addAct (Movie movie, Person person, String role);
+	
+	//delete
+	Optional<MovieFull> deleteMovie (int idMovie);
+
 }

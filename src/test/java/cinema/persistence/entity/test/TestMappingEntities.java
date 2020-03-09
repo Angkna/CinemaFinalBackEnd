@@ -20,13 +20,14 @@ import org.springframework.test.annotation.Rollback;
 import cinema.persistence.entity.Act;
 import cinema.persistence.entity.ActId;
 import cinema.persistence.entity.Audiance;
-import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
+
 import cinema.persistence.repository.ActRepository;
-import cinema.persistence.repository.GenreRepository;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
+
+
 
 
 
@@ -34,15 +35,11 @@ import cinema.persistence.repository.PersonRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 class TestMappingEntities {
-
-	
 	
 	@Autowired
 	PersonRepository repoPersons;
 	@Autowired
 	MovieRepository repoMovies;
-	@Autowired
-	GenreRepository repoGenres;
 	
 	@Autowired
 	ActRepository actRepository;
@@ -58,6 +55,7 @@ class TestMappingEntities {
 		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5))	;		
 		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
 		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
+
 		var brie = new Person("Brie Larson",LocalDate.of(1989, 10, 1));
 		var kevin = new Person("Kevin Bacon", LocalDate.of(1958, 8, 8));
 		var tom = new Person("Tom Hanks",LocalDate.of(1956, 7, 9));
@@ -67,21 +65,22 @@ class TestMappingEntities {
 		var kate = new Person ("Cate Blanchett",LocalDate.of(1969, 5, 14));
 		var viggo = new Person ("Viggo Mortensen", LocalDate.of(1968, 7, 20));
 		var franck = new Person ("Frank Langella",LocalDate.of(1938, 1, 1));
+		var nolan = new Person ("Christopher Nolan", LocalDate.of(1970, 7, 30));
 		
 		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan, brie, kevin, tom, meryl, colin, helena,
-									kate, viggo, franck
+									kate, viggo, franck, nolan
 									);
 		persons.forEach(repoPersons::save);
 		
 		//genre
-		var horror = new Genre("horror");		
-		var action = new Genre("action");
-		var fantasy = new Genre("fantasy");
-		var adventure = new Genre("adventure");
-		var animation = new Genre("animation");
-		var amour = new Genre ("amour");
-		var genres = List.of(horror, action, fantasy, adventure, animation, amour);
-		genres.forEach(repoGenres::save);
+		var horror = "horror";		
+		var action = "action";
+		var fantasy = "fantasy";
+		var adventure = "adventure";
+		var animation = "animation";
+		var amour = "amour";
+//		var genres = List.of(horror, action, fantasy, adventure, animation, amour);
+//		genres.forEach(repoGenres::save);
 		
 		
 		//films
@@ -384,8 +383,7 @@ class TestMappingEntities {
 			var movies = repoMovies.findByTitleContainingIgnoreCase("Interstellar");
 			if (movies.size()>0) {
 					var interstellar = movies.stream().findFirst().get();
-					var chris =  new Person ("Christopher Nolan", LocalDate.of(1970, 7, 30));
-					repoPersons.save(chris);
+					var chris =  repoPersons.findByName("Christopher Nolan").stream().findFirst().get();
 					interstellar.setDirector(chris);
 			}
 	}

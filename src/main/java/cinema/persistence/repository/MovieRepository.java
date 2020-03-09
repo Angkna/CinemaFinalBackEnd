@@ -14,6 +14,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	Set<Movie> findByTitle(String title);
 	Set<Movie> findByTitleContainingIgnoreCase(String title);
 	Set<Movie> findByTitleAndYear(String title, int year);
+	Set<Movie> findByTitleContainingIgnoreCaseAndYear(String title, int year);
 		
 	//year
 	Set<Movie> findByYear(int year);
@@ -29,7 +30,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	Set<Movie> findByDurationLessThanEqual(int duration);
 	
 	//genres
-	Set<Movie> findByGenresGenreIgnoreCase(String genre);
+	Set<Movie> findByGenresIgnoreCase(String genre);
 	
 	//rating
 	Set<Movie> findByRatingGreaterThanEqual(double rating);

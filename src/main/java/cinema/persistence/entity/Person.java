@@ -19,7 +19,7 @@ import javax.persistence.Transient;
 
 
 @Entity				
-	@Table(name = "persons")		
+@Table(name = "persons")		
 public class Person {
 
 	private Integer idPerson;

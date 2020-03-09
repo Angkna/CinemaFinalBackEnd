@@ -15,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import cinema.persistence.entity.Audiance;
-import cinema.persistence.entity.Genre;
 import cinema.persistence.entity.Movie;
 import cinema.persistence.entity.Person;
 import cinema.persistence.repository.MovieRepository;
@@ -285,13 +284,13 @@ class TestMovie {
 
 	@Test
 	void testFindByGenres() {
-		var horror = new Genre("horror");		
-		var action = new Genre("action");
-		var fantasy = new Genre("fantasy");
-		var adventure = new Genre("adventure");
-		var animation = new Genre("animation");
-		var genres = List.of(horror, action, fantasy, adventure, animation);
-		genres.forEach(entityManager::persist);
+		var horror = "horror";		
+		var action = "action";
+		var fantasy = "fantasy";
+		var adventure = "adventure";
+		var animation = "animation";
+//		var genres = List.of(horror, action, fantasy, adventure, animation);
+//		genres.forEach(entityManager::persist);
 
 		var joker = new Movie("Joker", 2019, 165);	
 		var parasite = new Movie("Parasite",2019, 132);
@@ -310,12 +309,11 @@ class TestMovie {
 		movies.forEach(entityManager::persist);
 
 		String genreRead = "adventure";
-		var dataRead = repoMovie.findByGenresGenreIgnoreCase(genreRead);
+		var dataRead = repoMovie.findByGenresIgnoreCase(genreRead);
 		System.out.println(dataRead);
 		assertTrue(dataRead.stream()
 				.allMatch(m -> m.getGenres().stream()	
-						.map(Genre::getGenre)
-						.anyMatch(n -> n.equals(genreRead))	
+						.anyMatch(g -> g.equals(genreRead))	
 						));
 	}
 

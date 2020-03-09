@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import cinema.persistence.entity.Movie;
+import cinema.dto.PersonFull;
 import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
 import cinema.service.IPersonService;
 
 @RestController
 @RequestMapping("/api/person")
-
 public class PersonController {
 	
 	@Autowired
@@ -47,7 +46,7 @@ public class PersonController {
 	
 	@GetMapping ("/byBirthDate")
 	@ResponseBody
-		public Set <Person> findByBirthdateYear(@RequestParam("b") int year) {
+		public Set<Person> findByBirthdateYear(@RequestParam("b") int year) {
 		return personService.getByBirthdateYear(year);
 	}
 	
@@ -63,6 +62,18 @@ public class PersonController {
 	@ResponseBody
 		public Set<Person> findByNationalities(@RequestParam("n") String nationalities) {
 			return personService.getByNationality(nationalities);
+	}
+	
+	@GetMapping("/directorByMovieId/{id}")
+	@ResponseBody
+	Optional<PersonFull> getDirectorFromMovie(@PathVariable("id") int idMovie){
+		return personService.getMovieDirector(idMovie);
+	}
+	
+	@GetMapping("/actorsByMovieId/{id}")
+	@ResponseBody
+	List<PersonFull> getActorsFromMovie(@PathVariable("id") int idMovie){
+		return personService.getMovieActors(idMovie);
 	}
 	
 	///////////////////////POST////////////////////////////
