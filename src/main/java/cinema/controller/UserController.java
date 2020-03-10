@@ -36,6 +36,13 @@ public class UserController {
 	}
 	
 	@CrossOrigin
+	@GetMapping("/token")
+	@ResponseBody
+	User getByToken(@RequestParam("t") String jwtToken){
+		return userService.getByToken(jwtToken);
+	}
+	
+	@CrossOrigin
 	@PostMapping
 	@ResponseBody
 	public User addUser(@RequestBody User user) {
