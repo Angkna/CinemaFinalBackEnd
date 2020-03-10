@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,14 +29,14 @@ public class PersonController {
 	@Autowired
 	IPersonService personService;	
 	
-	
+	@CrossOrigin
 	@GetMapping
 	@ResponseBody
 	public List<Person>getAllPersons() {
 		return personService.getAllPersons();
 		
 	}
-	
+	@CrossOrigin
 	@GetMapping("/byNamePartial")
 	@ResponseBody
 		public Set<Person> getByNameContainingIgnoreCase(@RequestParam("n") String name){
@@ -43,33 +44,33 @@ public class PersonController {
 	}
 
 	
-	
+	@CrossOrigin
 	@GetMapping ("/byBirthDate")
 	@ResponseBody
 		public Set<Person> findByBirthdateYear(@RequestParam("b") int year) {
 		return personService.getByBirthdateYear(year);
 	}
 	
-		
+	@CrossOrigin
 	@GetMapping("/{id}")
 	@ResponseBody
 	public Optional<Person> personById(@PathVariable("id")int idPerson) {
 		return personService.getByIdPerson(idPerson);
 	}
 
-		
+	@CrossOrigin
 	@GetMapping ("/byNationalities")
 	@ResponseBody
 		public Set<Person> findByNationalities(@RequestParam("n") String nationalities) {
 			return personService.getByNationality(nationalities);
 	}
-	
+	@CrossOrigin
 	@GetMapping("/directorByMovieId/{id}")
 	@ResponseBody
 	Optional<PersonFull> getDirectorFromMovie(@PathVariable("id") int idMovie){
 		return personService.getMovieDirector(idMovie);
 	}
-	
+	@CrossOrigin
 	@GetMapping("/actorsByMovieId/{id}")
 	@ResponseBody
 	List<PersonFull> getActorsFromMovie(@PathVariable("id") int idMovie){
@@ -78,19 +79,19 @@ public class PersonController {
 	
 	///////////////////////POST////////////////////////////
 	
-	
+	@CrossOrigin
 	@PostMapping ("/addPerson")
 		Person addPerson(@RequestBody Person person){
 			return personService.addPerson(person);	
 	}
-
+	@CrossOrigin
 	@PostMapping ("/addNewNationality")
 	Nationality addNationality(@RequestParam("n") String nationality){
 		return personService.addNationality(nationality);	
 	}
 
 	///////////////////////////PUT////////////////////////
-	
+	@CrossOrigin
 	@PutMapping ("/addNationalityToPerson")
 		Optional<Person> addNationalityToPerson(@RequestParam("n") String nationality, @RequestParam("p") int idPerson) {
 		return personService.addNationalityToPerson(nationality, idPerson);
