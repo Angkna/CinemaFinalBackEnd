@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cinema.config.JwtTokenUtil;
 import cinema.persistence.entity.User;
 import cinema.persistence.repository.UserRepository;
 import cinema.service.IUserService;
@@ -19,6 +20,8 @@ public class UserService implements IUserService{
 	UserRepository userRepository;
 	@Autowired 
 	PasswordEncoder passwordEncoder;
+	@Autowired
+	JwtTokenUtil jwtTokenUtil;
 	
 	@Override
 	public List<User> getAllUser() {
@@ -35,6 +38,12 @@ public class UserService implements IUserService{
 	@Override
 	public User getByUserName(String username) {
 		return userRepository.findByUserNameIgnoreCase(username);
+	}
+
+	@Override
+	public User getByToken(String jwtToken) {
+		String username = jwtTokenUtil.getUserNameFromToken(jwtToken);
+		return getByUserName(username);
 	}
 
 }
