@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cinema.config.JwtTokenUtil;
+import cinema.dto.MovieFull;
 import cinema.persistence.entity.User;
 import cinema.persistence.repository.UserRepository;
 import cinema.service.IUserService;
@@ -44,6 +45,19 @@ public class UserService implements IUserService{
 	public User getByToken(String jwtToken) {
 		String username = jwtTokenUtil.getUserNameFromToken(jwtToken);
 		return getByUserName(username);
+	}
+
+	@Override
+	public User modifyUser(User user) {
+		var userM = userRepository.findById(user.getIdUser());
+		userM.ifPresent(u ->  {
+				u.setUserName(user.getUserName());
+				u.setPassword(user.getPassword());
+				u.setEmail(user.getEmail());
+						
+		});
+		userRepository.flush();
+		return null;
 	}
 
 }
