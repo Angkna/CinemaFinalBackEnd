@@ -9,4 +9,5 @@ public interface IUserService {
 	User addUser(User user);
 	User getByUserName(String username);
 	User getByToken(String jwtToken);
+	User modifyUser(User user);
 }
