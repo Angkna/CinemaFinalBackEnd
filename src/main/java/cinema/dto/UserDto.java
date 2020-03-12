@@ -4,6 +4,8 @@ import java.util.List;
 
 public class UserDto {
 	private Integer idUser;
+	private String firstName;
+	private String lastName;
 	private String userName;
 	private String password;
 	private String email;
@@ -15,6 +17,18 @@ public class UserDto {
 	}
 	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getUserName() {
 		return userName;

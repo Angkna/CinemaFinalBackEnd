@@ -65,6 +65,8 @@ public class UserService implements IUserService{
 		String temp = user.getPassword();
 		var userM = userRepository.findById(user.getIdUser());
 		userM.ifPresent(u ->  {
+				u.setFirstName(user.getFirstName());
+				u.setLastName(user.getLastName());
 				u.setUserName(user.getUserName());
 				u.setPassword(passwordEncoder.encode(temp));
 				u.setEmail(user.getEmail());		
