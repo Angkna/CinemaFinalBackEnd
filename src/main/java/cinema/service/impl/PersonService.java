@@ -104,5 +104,19 @@ public class PersonService implements IPersonService {
 						)
 				.orElse(List.of());
 	}
+
+	@Override
+	public Optional<PersonFull> modifyPerson(PersonFull person) {
+		var optPerson = personRepository.findById(person.getIdPerson());
+		optPerson.ifPresent(m ->  {
+				m.setName(person.getName());
+				m.setBiography(person.getBiography());
+				m.setBirthdate(person.getBirthdate());
+				//m.setMovies(person.getMovies());
+				//m.setNationalities(person.getNationalities());
+		});
+		personRepository.flush();
+		return optPerson.map(m -> mapper.map(m, PersonFull.class));
+	}
 	
 }

@@ -27,11 +27,6 @@ import cinema.persistence.repository.ActRepository;
 import cinema.persistence.repository.MovieRepository;
 import cinema.persistence.repository.PersonRepository;
 
-
-
-
-
-
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 class TestMappingEntities {
@@ -40,7 +35,6 @@ class TestMappingEntities {
 	PersonRepository repoPersons;
 	@Autowired
 	MovieRepository repoMovies;
-	
 	@Autowired
 	ActRepository actRepository;
 	
@@ -55,7 +49,6 @@ class TestMappingEntities {
 		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5))	;		
 		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
 		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
-
 		var brie = new Person("Brie Larson",LocalDate.of(1989, 10, 1));
 		var kevin = new Person("Kevin Bacon", LocalDate.of(1958, 8, 8));
 		var tom = new Person("Tom Hanks",LocalDate.of(1956, 7, 9));
@@ -161,9 +154,9 @@ class TestMappingEntities {
 		
 
 		//biography
-//		brie.setBiography("Brie Larson has built an impressive career as an acclaimed television actress, rising feature film star and emerging recording artist. A native of Sacramento, Brie started studying drama at the early age of 6.");
-//		brad.setBiography("Bradley Charles Cooper was born on January 5, 1975 in Philadelphia, Pennsylvania. His mother, Gloria (Campano), is of Italian descent, and worked for a local NBC station. ");
-//		gene.setBiography("Eugene Allen Hackman was born in San Bernardino, California, the son of Ann-nnsylvania Dutch (German), English, and Scottish ancestry, partly by way of Canada, where his mother was born.");
+		brie.setBiography("Brie Larson has built an impressive career as an acclaimed television actress, rising feature film star and emerging recording artist. A native of Sacramento, Brie started studying drama at the early age of 6.");
+		brad.setBiography("Bradley Charles Cooper was born on January 5, 1975 in Philadelphia, Pennsylvania. His mother, Gloria (Campano), is of Italian descent, and worked for a local NBC station. ");
+		gene.setBiography("Eugene Allen Hackman was born in San Bernardino, California, the son of Ann-nnsylvania Dutch (German), English, and Scottish ancestry, partly by way of Canada, where his mother was born.");
 		
 		
 		movies.forEach(repoMovies::save);

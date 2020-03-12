@@ -14,10 +14,13 @@ public interface IPersonService {
 	Set<Person> getByNameContainingIgnoreCase(String name);
 	Set<Person> getByBirthdateYear(int year);
 	Optional<Person> getByIdPerson(int idPerson);
-	Person addPerson(Person person);
 	Set<Person> getByNationality(String nationality);
-	Nationality addNationality(String nationality);
-	Optional<Person> addNationalityToPerson(String nationality, int idPerson);
 	Optional<PersonFull> getMovieDirector(int idMovie);
 	List<PersonFull> getMovieActors(int idMovie);
+	
+	Person addPerson(Person person);
+	Nationality addNationality(String nationality);
+	Optional<Person> addNationalityToPerson(String nationality, int idPerson);
+	
+	Optional<PersonFull> modifyPerson(PersonFull person);
 }
