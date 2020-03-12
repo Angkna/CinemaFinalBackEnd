@@ -23,6 +23,8 @@ import javax.persistence.UniqueConstraint;
 public class User {
 	
 	private Integer idUser;
+	private String firstName;
+	private String lastName;
 	private String userName;
 	private String password;
 	private String email;
@@ -33,9 +35,11 @@ public class User {
 		super();
 	}
 
-	public User(String userName, String password, String email, String role) {
+	public User(String firstName,String lastName, String userName, String password, String email, String role) {
 		super();
 		this.idUser = null;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
@@ -53,6 +57,24 @@ public class User {
 		this.idUser = idUser;
 	}
 	
+	@Column(nullable = false)
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	@Column(nullable = false)
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	@Column(nullable = false)
 	public String getUserName() {
 		return userName;
