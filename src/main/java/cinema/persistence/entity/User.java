@@ -1,6 +1,7 @@
 package cinema.persistence.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class User {
 	private String password;
 	private String email;
 	private String role;
-	private List<Movie> movieLiked;
+	private Set<Movie> movieLiked;
 	
 	public User() {
 		super();
@@ -95,11 +96,11 @@ public class User {
 		joinColumns= @JoinColumn(name="id_user"),
 		inverseJoinColumns= @JoinColumn(name="id_movies")
 	)
-	public List<Movie> getMovieLiked() {
+	public Set<Movie> getMovieLiked() {
 		return movieLiked;
 	}
 
-	public void setMovieLiked(List<Movie> movieLiked) {
+	public void setMovieLiked(Set<Movie> movieLiked) {
 		this.movieLiked = movieLiked;
 	}
 
