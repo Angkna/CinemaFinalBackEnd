@@ -92,6 +92,12 @@ public class PersonController {
 
 	///////////////////////////PUT////////////////////////
 	@CrossOrigin
+	@PutMapping ("/modify")
+	Optional<PersonFull> modifyPerson(@RequestBody PersonFull person){
+		return personService.modifyPerson(person);
+	}
+	
+	@CrossOrigin
 	@PutMapping ("/addNationalityToPerson")
 		Optional<Person> addNationalityToPerson(@RequestParam("n") String nationality, @RequestParam("p") int idPerson) {
 		return personService.addNationalityToPerson(nationality, idPerson);

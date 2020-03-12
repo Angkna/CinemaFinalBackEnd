@@ -1,10 +1,10 @@
 package cinema.persistence.entity;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -90,7 +90,7 @@ public class User {
 		this.role = role;
 	}
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 		name="likedmovie",
 		joinColumns= @JoinColumn(name="id_user"),
@@ -102,6 +102,31 @@ public class User {
 
 	public void setMovieLiked(Set<Movie> movieLiked) {
 		this.movieLiked = movieLiked;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (idUser == null) {
+			if (other.idUser != null)
+				return false;
+		} else if (!idUser.equals(other.idUser))
+			return false;
+		return true;
 	}
 
 	

@@ -2,16 +2,17 @@ package cinema.persistence.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -39,7 +40,7 @@ public class Movie {
 	@OneToMany(mappedBy = "person")
 	private List<Person> actors;
 
-	private List<User> likedByUsers;
+	private Set<User> usersWhoLike;
 
 
 
@@ -181,13 +182,13 @@ public class Movie {
 		this.actors = actors;
 	}
 
-	@ManyToMany(mappedBy = "movieLiked")
-	public List<User> getLikedByUsers() {
-		return likedByUsers;
+	@ManyToMany(mappedBy = "movieLiked", fetch=FetchType.LAZY)
+	public Set<User> getUsersWhoLike() {
+		return usersWhoLike;
 	}
 
-	public void setLikedByUsers(List<User> likedByUsers) {
-		this.likedByUsers = likedByUsers;
+	public void setUsersWhoLike(Set<User> usersWhoLike) {
+		this.usersWhoLike = usersWhoLike;
 	}
 
 	//to string method
@@ -201,6 +202,31 @@ public class Movie {
 				.append(idMovie)
 				.toString();
 
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idMovie == null) ? 0 : idMovie.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Movie other = (Movie) obj;
+		if (idMovie == null) {
+			if (other.idMovie != null)
+				return false;
+		} else if (!idMovie.equals(other.idMovie))
+			return false;
+		return true;
 	}
 
 

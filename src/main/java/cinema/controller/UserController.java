@@ -1,6 +1,8 @@
 package cinema.controller;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import cinema.persistence.entity.User;
+import cinema.dto.UserDto;
 import cinema.service.IUserService;
 
 @RestController 
@@ -25,35 +27,42 @@ public class UserController {
 	
 	@GetMapping
 	@ResponseBody
-	List<User> getAllUser(){
+	public List<UserDto> getAllUser(){
 		return userService.getAllUser();
 	}
 	
 	@CrossOrigin
 	@GetMapping("/username")
 	@ResponseBody
-	User getByUserName(@RequestParam("u") String username){
+	public Optional<UserDto> getByUserName(@RequestParam("u") String username){
 		return userService.getByUserName(username);
 	}
 	
 	@CrossOrigin
 	@GetMapping("/token")
 	@ResponseBody
-	User getByToken(@RequestParam("t") String jwtToken){
+	public Optional<UserDto> getByToken(@RequestParam("t") String jwtToken){
 		return userService.getByToken(jwtToken);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/movieLiked")
+	@ResponseBody
+	public Set<UserDto> getByMovieLiked(@RequestParam("id") int idMovie){
+		return userService.getByMovieLiked(idMovie);
 	}
 	
 	@CrossOrigin
 	@PostMapping
 	@ResponseBody
-	public User addUser(@RequestBody User user) {
+	public UserDto addUser(@RequestBody UserDto user) {
 		return userService.addUser(user);
 	}
 	
 	@CrossOrigin
 	@PutMapping
 	@ResponseBody
-	public User modifyUser(@RequestBody User user) {
+	public Optional<UserDto> modifyUser(@RequestBody UserDto user) {
 		return userService.modifyUser(user);
 	}
 }

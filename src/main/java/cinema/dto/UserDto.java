@@ -8,7 +8,7 @@ public class UserDto {
 	private String password;
 	private String email;
 	private String role;
-	//private List<MovieLight> movieLiked;
+	private List<MovieLight> movieLiked;
 	
 	public Integer getIdUser() {
 		return idUser;
@@ -39,5 +39,11 @@ public class UserDto {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public List<MovieLight> getMovieLiked() {
+		return movieLiked;
+	}
+	public void setMovieLiked(List<MovieLight> movieLiked) {
+		this.movieLiked = movieLiked;
 	}
 }

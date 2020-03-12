@@ -133,6 +133,15 @@ public class MovieController {
 		 return movieService.getMovieByDurationLessThanEqual(duration);
 	}
 	
+	
+	@CrossOrigin
+	@GetMapping("/likedByIdUser")
+	@ResponseBody
+	public Set<MovieLight> getLikedMovies(@RequestParam("id") int idUser){
+		 return movieService.getLikedMovies(idUser);
+	}
+	
+	
 	//A tester /////////////////////////////////////////////////////
 	@GetMapping("/byGenre")
 	@ResponseBody
