@@ -8,9 +8,13 @@ import cinema.dto.UserDto;
 
 public interface IUserService {
 	List<UserDto> getAllUser();
-	UserDto addUser(UserDto user);
 	Optional<UserDto> getByUserName(String username);
 	Optional<UserDto> getByToken(String jwtToken);
-	Optional<UserDto> modifyUser(UserDto user);
 	Set<UserDto> getByMovieLiked(int idMovie);
+	
+	UserDto addUser(UserDto user);
+	
+	Optional<UserDto> modifyUser(UserDto user);
+	Optional<UserDto> addLikedMovieToUser(String userName, int idMovie);
+	Optional<UserDto> deleteLikedMovieToUser(String userName, int idMovie);
 }

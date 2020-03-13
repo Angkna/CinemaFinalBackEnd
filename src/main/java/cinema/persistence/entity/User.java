@@ -125,6 +125,14 @@ public class User {
 	public void setMovieLiked(Set<Movie> movieLiked) {
 		this.movieLiked = movieLiked;
 	}
+	
+	public void addMovieLiked(Movie movie) {
+		this.movieLiked.add(movie);
+	}
+	
+	public void deleteMovieLiked(Movie movie) {
+		this.movieLiked.remove(movie);
+	}
 
 	@Override
 	public int hashCode() {

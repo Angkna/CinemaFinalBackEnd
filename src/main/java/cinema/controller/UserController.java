@@ -65,4 +65,18 @@ public class UserController {
 	public Optional<UserDto> modifyUser(@RequestBody UserDto user) {
 		return userService.modifyUser(user);
 	}
+	
+	@CrossOrigin
+	@PutMapping("/addMovieLiked")
+	@ResponseBody
+	public Optional<UserDto> addLikedMovieToUser(@RequestParam("idUser") String userName, @RequestParam("idMovie") int idMovie) {
+		return userService.addLikedMovieToUser(userName, idMovie);
+	}
+	
+	@CrossOrigin
+	@PutMapping("/deleteMovieLiked")
+	@ResponseBody
+	public Optional<UserDto> deleteLikedMovieToUser(@RequestParam("idUser") String userName, @RequestParam("idMovie") int idMovie) {
+		return userService.deleteLikedMovieToUser(userName, idMovie);
+	}
 }
