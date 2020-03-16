@@ -223,12 +223,20 @@ public class MovieService implements IMovieService {
 //				.collect(Collectors.toCollection(HashSet::new));
 //	}
 
+//	@Override
+//	public MovieFull addMovie(MovieFull movieFull) {		
+//		Movie movie = mapper.map(movieFull, Movie.class);
+//		movieRepository.save(movie);
+//		mapper.map(movie, movieFull);
+//		return movieFull;
+//	}
+	
 	@Override
-	public MovieFull addMovie(MovieFull movieFull) {		
-		Movie movie = mapper.map(movieFull, Movie.class);
+	public MovieLight addMovie(MovieLight movieLight) {		
+		Movie movie = mapper.map(movieLight, Movie.class);
 		movieRepository.save(movie);
-		mapper.map(movie, movieFull);
-		return movieFull;
+		mapper.map(movie, movieLight);
+		return movieLight;
 	}
 
 	@Override

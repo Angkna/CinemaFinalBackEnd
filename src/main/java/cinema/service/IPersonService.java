@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import cinema.dto.MovieFull;
 import cinema.dto.PersonFull;
 import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
@@ -18,9 +19,14 @@ public interface IPersonService {
 	Optional<PersonFull> getMovieDirector(int idMovie);
 	List<PersonFull> getMovieActors(int idMovie);
 	
+
+//	Optional<Person> modifyPerson(Person person);
+	Optional<Person> deletePerson(int idPerson);
+
 	Person addPerson(Person person);
 	Nationality addNationality(String nationality);
 	Optional<Person> addNationalityToPerson(String nationality, int idPerson);
 	
 	Optional<PersonFull> modifyPerson(PersonFull person);
+
 }

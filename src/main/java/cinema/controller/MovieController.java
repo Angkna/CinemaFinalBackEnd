@@ -219,10 +219,17 @@ public class MovieController {
 	
 	////////////////////////Post//////////////////////////
 
+//	@CrossOrigin
+//	@PostMapping
+//	@ResponseBody
+//	public MovieFull addMovie (@RequestBody MovieFull movie) {
+//		return movieService.addMovie(movie);
+//	}
+	
 	@CrossOrigin
 	@PostMapping
 	@ResponseBody
-	public MovieFull addMovie (@RequestBody MovieFull movie) {
+	public MovieLight addMovie (@RequestBody MovieLight movie) {
 		return movieService.addMovie(movie);
 	}
 	

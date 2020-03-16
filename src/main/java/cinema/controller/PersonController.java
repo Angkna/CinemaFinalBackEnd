@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cinema.dto.MovieFull;
 import cinema.dto.PersonFull;
 import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
@@ -102,5 +104,21 @@ public class PersonController {
 		Optional<Person> addNationalityToPerson(@RequestParam("n") String nationality, @RequestParam("p") int idPerson) {
 		return personService.addNationalityToPerson(nationality, idPerson);
 	}
+	
+//	@CrossOrigin
+//	@PutMapping("/modify")
+//	@ResponseBody
+//	public Optional<Person> modifyPerson (@RequestBody Person person) {
+//		return personService.modifyPerson(person);
+//	}
+	
+	//////////////////DELETE //////////£@CrossOrigin
+	@CrossOrigin
+	@DeleteMapping("/{id}")
+	@ResponseBody
+	public Optional<Person> deletePerson (@PathVariable ("id") int idPerson) {
+		return personService.deletePerson(idPerson);	
+	}
+	
 	
 }
