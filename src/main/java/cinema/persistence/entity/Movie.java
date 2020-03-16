@@ -37,7 +37,6 @@ public class Movie {
 	private Audiance audiance;
 	private Person director;
 	
-	@OneToMany(mappedBy = "person")
 	private List<Person> actors;
 
 	private Set<User> usersWhoLike;
@@ -174,6 +173,7 @@ public class Movie {
 //	@JoinColumn(name="id_actor")
 //			)
 	@Transient
+	//@OneToMany(mappedBy = "movie")
 	public List<Person> getActors() {
 		return actors;
 	}

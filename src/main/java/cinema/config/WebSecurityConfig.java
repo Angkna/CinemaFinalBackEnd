@@ -48,6 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/api/person/**").permitAll()
 			.antMatchers("/api/user").permitAll()
 			.antMatchers("/api/user/**").permitAll()
+			.antMatchers("/api/act").permitAll()
+			.antMatchers("/api/act/**").permitAll()
 			.anyRequest().authenticated().and()
 			.exceptionHandling()
 			.authenticationEntryPoint(jwtAuthenticationEntryPoint).and()

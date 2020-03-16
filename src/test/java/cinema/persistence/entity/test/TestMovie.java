@@ -599,5 +599,19 @@ class TestMovie {
 		System.out.println("Liste de movie liked by user 3 : "  + listMovieLikedByOne);
 
 	}
+	
+	@Test
+	void testMovieActor() {
+		var movietest = repoMovie.findById(15);
+		movietest.ifPresent(m -> {
+			System.out.println(m);
+			System.out.println(m.getActors());
+			
+		});
+
+
+		
+		
+	}
 
 }
