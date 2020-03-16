@@ -592,5 +592,12 @@ class TestMovie {
 		String role = "JeanJoker";
 		
 	}
+	
+	@Test
+	void testMovieLike() {
+		var listMovieLikedByOne = repoMovie.findByUsersWhoLike(3);
+		System.out.println("Liste de movie liked by user 3 : "  + listMovieLikedByOne);
+
+	}
 
 }

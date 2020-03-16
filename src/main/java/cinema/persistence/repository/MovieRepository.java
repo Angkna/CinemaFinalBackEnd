@@ -3,6 +3,7 @@ package cinema.persistence.repository;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import cinema.persistence.entity.Audiance;
 import cinema.persistence.entity.Movie;
@@ -53,4 +54,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 //	Set<Movie> findByActorsIdPerson (int idActor);
 //	Set<Movie> findByActorsNameEndingWith(String name);
 	
+	//test Like
+	@Query("SELECT m FROM Movie m JOIN m.usersWhoLike u WHERE u.idUser = ?1")
+	Set<Movie> findByUsersWhoLike (int idUser);
 }

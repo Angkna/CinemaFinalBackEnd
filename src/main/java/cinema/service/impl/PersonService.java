@@ -107,26 +107,23 @@ public class PersonService implements IPersonService {
 				.orElse(List.of());
 	}
 
+
+
+	
+//	@CrossOrigin
 //	@Override
 //	public Optional<Person> modifyPerson(Person person) {
-//		// TODO Auto-generated method stub
-//		return null;
+//		var optPerson = personRepository.findById(person.getIdPerson());
+//		optPerson.ifPresent(m ->  {
+//				m.setName(person.getName());
+//				m.setBirthdate(person.getBirthdate());
+//				m.setBiography(person.getBiography());
+//				m.setNationalities(person.getNationalities());
+//		});
+//		personRepository.flush();
+//		return optPerson.map(p -> mapper.map(p, Person.class));
+//	
 //	}
-	
-	@CrossOrigin
-	@Override
-	public Optional<Person> modifyPerson(Person person) {
-		var optPerson = personRepository.findById(person.getIdPerson());
-		optPerson.ifPresent(m ->  {
-				m.setName(person.getName());
-				m.setBirthdate(person.getBirthdate());
-				m.setBiography(person.getBiography());
-				m.setNationalities(person.getNationalities());
-		});
-		personRepository.flush();
-		return optPerson.map(p -> mapper.map(p, Person.class));
-	
-	}
 /////////////DELETE//////////
 
 	@CrossOrigin
@@ -143,5 +140,20 @@ public class PersonService implements IPersonService {
 	}
 	
 	
+
+	@Override
+	public Optional<PersonFull> modifyPerson(PersonFull person) {
+		var optPerson = personRepository.findById(person.getIdPerson());
+		optPerson.ifPresent(m ->  {
+				m.setName(person.getName());
+				m.setBiography(person.getBiography());
+				m.setBirthdate(person.getBirthdate());
+				//m.setMovies(person.getMovies());
+				//m.setNationalities(person.getNationalities());
+		});
+		personRepository.flush();
+		return optPerson.map(m -> mapper.map(m, PersonFull.class));
+	}
+
 	
 }

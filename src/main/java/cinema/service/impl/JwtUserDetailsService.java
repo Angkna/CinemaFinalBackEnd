@@ -24,20 +24,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		var exist = userService.getAllUser().stream().map(user -> user.getUserName()).filter(name -> name.equals(username)).findFirst().isPresent();
 		if ( exist ) { 
-			System.out.println("oui, ca existe dans le backend");
 			return new User(
 					username,
-					userService.getByUserName(username).getPassword(), 
+					userService.getByUserName(username).get().getPassword(), 
 					new ArrayList<>()
 					);
 		}
-//		if ("administrator".equals(username)) {
-//			return new User(
-//					"administrator",
-//					passwordEncoder.encode("password"), 
-//					new ArrayList<>()
-//					);
-//		} 
 		else {
 			throw new UsernameNotFoundException("User not found with this username");
 		}

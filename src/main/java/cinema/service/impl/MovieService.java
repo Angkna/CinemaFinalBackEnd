@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import cinema.persistence.entity.Act;
 import cinema.dto.MovieLight;
 import cinema.dto.MovieFull;
 
@@ -195,6 +193,13 @@ public class MovieService implements IMovieService {
 		//var directOpt =personRepository.findById(idDirector); 
 		//return directOpt.map(d-> movieRepository.findByDirector(d)).orElseGet( () -> Collections.emptySet());
 		return null;
+	}
+	
+	@Override
+	public Set<MovieLight> getLikedMovies(int idUser) {
+		return movieRepository.findByUsersWhoLike(idUser).stream()
+		.map(m -> mapper.map(m, MovieLight.class))
+		.collect(Collectors.toCollection(HashSet::new));
 	}
 
 //	@Override

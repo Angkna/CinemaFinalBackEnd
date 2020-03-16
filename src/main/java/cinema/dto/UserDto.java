@@ -4,17 +4,31 @@ import java.util.List;
 
 public class UserDto {
 	private Integer idUser;
+	private String firstName;
+	private String lastName;
 	private String userName;
 	private String password;
 	private String email;
 	private String role;
-	//private List<MovieLight> movieLiked;
+	private List<MovieLight> movieLiked;
 	
 	public Integer getIdUser() {
 		return idUser;
 	}
 	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getUserName() {
 		return userName;
@@ -39,5 +53,11 @@ public class UserDto {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public List<MovieLight> getMovieLiked() {
+		return movieLiked;
+	}
+	public void setMovieLiked(List<MovieLight> movieLiked) {
+		this.movieLiked = movieLiked;
 	}
 }

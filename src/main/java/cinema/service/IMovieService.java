@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import cinema.persistence.entity.Act;
 import cinema.dto.MovieFull;
 import cinema.dto.MovieLight;
 import cinema.persistence.entity.Audiance;
@@ -44,6 +43,7 @@ public interface IMovieService {
 	Set<MovieLight> getMovieByDirectorNameEndingWith(String name);
 	Set<MovieLight> getMovieByDirectorId(int idDirector);
 	
+	Set<MovieLight>  getLikedMovies(int idUser);
 
 //	Set<MovieLight> getMovieByActorsName(String name);
 //	Set<MovieLight> getMovieByActorsIdPerson(int idActor);
