@@ -10,7 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+import cinema.dto.MovieFull;
 import cinema.dto.PersonFull;
 import cinema.persistence.entity.Nationality;
 import cinema.persistence.entity.Person;
@@ -104,5 +106,42 @@ public class PersonService implements IPersonService {
 						)
 				.orElse(List.of());
 	}
+
+//	@Override
+//	public Optional<Person> modifyPerson(Person person) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	
+	@CrossOrigin
+	@Override
+	public Optional<Person> modifyPerson(Person person) {
+		var optPerson = personRepository.findById(person.getIdPerson());
+		optPerson.ifPresent(m ->  {
+				m.setName(person.getName());
+				m.setBirthdate(person.getBirthdate());
+				m.setBiography(person.getBiography());
+				m.setNationalities(person.getNationalities());
+		});
+		personRepository.flush();
+		return optPerson.map(p -> mapper.map(p, Person.class));
+	
+	}
+/////////////DELETE//////////
+
+	@CrossOrigin
+	@Override
+	public Optional<Person> deletePerson(int idPerson) {
+		var personToDelete = personRepository.findById(idPerson);
+		personToDelete.map(m -> mapper.map(m, Person.class));;
+//		var personFullToDelete = personToDelete.map(m -> mapper.map(m, Person.class));
+		personToDelete.ifPresent(m -> {
+			personRepository.delete(m);
+		});
+		personRepository.flush();
+		return personToDelete;
+	}
+	
+	
 	
 }

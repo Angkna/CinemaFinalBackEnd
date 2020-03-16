@@ -51,7 +51,8 @@ public interface IMovieService {
 	
 	
 	//post-put
-	MovieFull addMovie(MovieFull movie);
+//	MovieFull addMovie(MovieFull movie);
+	MovieLight addMovie(MovieLight movie);
 	//String addGenre(String genre); //?
 	Optional<MovieFull> modifyMovie (MovieFull movie);
 	Optional<MovieFull> addActor (int idActor, int idMovie);
