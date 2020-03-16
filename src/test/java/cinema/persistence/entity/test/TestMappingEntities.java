@@ -161,61 +161,62 @@ class TestMappingEntities {
 		
 		movies.forEach(repoMovies::save);
 		
-	}
-	
-	@Rollback(false)
-	@Test
-	void DegresKevinBacon () {
-		var joaq = new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28));  	
-		var gege = new Person("Gerard Darmond", LocalDate.of(1948, 02, 29));    	
-		var todd = new Person("Todd Phillips", LocalDate.of(1970, 12, 20));		
-		var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31));		
-		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5))	;		
-		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
-		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
-		var brie = new Person("Brie Larson",LocalDate.of(1989, 10, 1));
-		var kevin = new Person("Kevin Bacon", LocalDate.of(1958, 8, 8));
-		var tom = new Person("Tom Hanks",LocalDate.of(1956, 7, 9));
-		var meryl = new Person ("Meryl Streep",LocalDate.of(1949, 6, 22));
-		var colin = new Person("Colin Firth", LocalDate.of(1960, 9, 10));
-		var helena = new Person ("Helena Bonham Carter", LocalDate.of(1966, 5, 26));
-		var kate = new Person ("Cate Blanchett",LocalDate.of(1969, 5, 14));
-		var viggo = new Person ("Viggo Mortensen", LocalDate.of(1968, 7, 20));
-		var franck = new Person ("Frank Langella",LocalDate.of(1938, 1, 1));
-		
-		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan, brie, kevin, tom, meryl, colin, helena,
-									kate, viggo, franck
-									);
-		persons.forEach(repoPersons::save);
-
-		//films
-		var joker = new Movie("Joker", 2019, 165, 8.6, todd);	
-		var parasite = new Movie("Parasite",2019, 132);
-		var interstellar = new Movie("Interstellar",2014, 169);		
-		var granTorino= new Movie("Gran Torino", 2008, 116, clint);	
-		var impitoyable = new Movie("Impitoyable", 1992, 130, clint);	
-		var snip = new Movie("American Sniper", 2014, 133, 8.1, clint);		
-		var bad = new Movie("Very Bad Trip", 2009, 100, 5.1, todd);	
-		var infwar = new Movie("Avengers: Infinity War", 2018, 149);
-		var end = new Movie("Avengers: Endgame", 2019, 181);				
-		var aven = new Movie("Avengers", 2012, 143);					
-		var marvel = new Movie("Captain Marvel", 2019, 123);				
-		var ultron = new Movie("Avengers : L'ere d'Ultron", 2015, 141);	
-		var pouvoirs = new Movie("Les pleins pouvoirs", 1997);
-		var ap13 = new Movie("Apollon 13",1995);
-		var paper = new Movie("Pentagon Papers", 2018);
-		var mamma = new Movie("Mamma Mia!" ,2008);
-		var roi = new Movie ("Le discours d un roi",2011);
-		var ocean = new Movie("Ocean s 8", 2018);
-		var anneaux = new Movie ("Le Seigneur des anneaux", 2002);
-		var fantastic = new Movie ("Captain Fantastic", 2016);
-		
-		var movies = List.of(joker,parasite,interstellar,granTorino, impitoyable, snip,bad, infwar, 
-							end,aven,marvel,ultron, pouvoirs, ap13, paper, mamma, roi, ocean, anneaux,
-							fantastic
-							);
-		movies.forEach(repoMovies::save);
-		repoMovies.flush();
+//	}
+//	
+//	@Rollback(false)
+//	@Test
+//	void DegresKevinBacon () {
+//		var joaq = new Person("Joaquin Phoenix", LocalDate.of(1974, 10, 28));  	
+//		var gege = new Person("Gerard Darmond", LocalDate.of(1948, 02, 29));    	
+//		var todd = new Person("Todd Phillips", LocalDate.of(1970, 12, 20));		
+//		var clint = new Person("Clint Eastwood", LocalDate.of(1930, 5, 31));		
+//		var brad = new Person("Bradley Cooper", LocalDate.of(1975, 1, 5))	;		
+//		var gene = new Person("Gene Hackman", LocalDate.of(1930, 1, 30));			
+//		var morgan = new Person("Morgan Freeman", LocalDate.of(1937, 6, 1));
+//		var brie = new Person("Brie Larson",LocalDate.of(1989, 10, 1));
+//		var kevin = new Person("Kevin Bacon", LocalDate.of(1958, 8, 8));
+//		var tom = new Person("Tom Hanks",LocalDate.of(1956, 7, 9));
+//		var meryl = new Person ("Meryl Streep",LocalDate.of(1949, 6, 22));
+//		var colin = new Person("Colin Firth", LocalDate.of(1960, 9, 10));
+//		var helena = new Person ("Helena Bonham Carter", LocalDate.of(1966, 5, 26));
+//		var kate = new Person ("Cate Blanchett",LocalDate.of(1969, 5, 14));
+//		var viggo = new Person ("Viggo Mortensen", LocalDate.of(1968, 7, 20));
+//		var franck = new Person ("Frank Langella",LocalDate.of(1938, 1, 1));
+//		
+//		var persons = List.of(joaq, gege, todd, clint, brad, gene, morgan, brie, kevin, tom, meryl, colin, helena,
+//									kate, viggo, franck
+//									);
+//		persons.forEach(repoPersons::save);
+//
+//		//films
+//		var joker = new Movie("Joker", 2019, 165, 8.6, todd);	
+//		var parasite = new Movie("Parasite",2019, 132);
+//		var interstellar = new Movie("Interstellar",2014, 169);		
+//		var granTorino= new Movie("Gran Torino", 2008, 116, clint);	
+//		var impitoyable = new Movie("Impitoyable", 1992, 130, clint);	
+//		var snip = new Movie("American Sniper", 2014, 133, 8.1, clint);		
+//		var bad = new Movie("Very Bad Trip", 2009, 100, 5.1, todd);	
+//		var infwar = new Movie("Avengers: Infinity War", 2018, 149);
+//		var end = new Movie("Avengers: Endgame", 2019, 181);				
+//		var aven = new Movie("Avengers", 2012, 143);					
+//		var marvel = new Movie("Captain Marvel", 2019, 123);				
+//		var ultron = new Movie("Avengers : L'ere d'Ultron", 2015, 141);	
+//		var pouvoirs = new Movie("Les pleins pouvoirs", 1997);
+//		var ap13 = new Movie("Apollon 13",1995);
+//		var paper = new Movie("Pentagon Papers", 2018);
+//		var mamma = new Movie("Mamma Mia!" ,2008);
+//		var roi = new Movie ("Le discours d un roi",2011);
+//		var ocean = new Movie("Ocean s 8", 2018);
+//		var anneaux = new Movie ("Le Seigneur des anneaux", 2002);
+//		var fantastic = new Movie ("Captain Fantastic", 2016);
+//		
+//		var movies = List.of(joker,parasite,interstellar,granTorino, impitoyable, snip,bad, infwar, 
+//							end,aven,marvel,ultron, pouvoirs, ap13, paper, mamma, roi, ocean, anneaux,
+//							fantastic
+//							);
+//		
+//		movies.forEach(repoMovies::save);
+//		repoMovies.flush();
 		//ajout acteur aux films
 		
 //		var movie = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
@@ -248,6 +249,8 @@ class TestMappingEntities {
 	
 		
 		var acttotal =  List.of(act,act2,act3,act4,act5,act6,act7,act8,act9,act9,act10,act11,act12,act13,act14);
+		acttotal.forEach(actRepository::save);
+		actRepository.flush();
 	}
 //		acttotal.forEach(actRepository::save);
 //		repoMovies.flush();

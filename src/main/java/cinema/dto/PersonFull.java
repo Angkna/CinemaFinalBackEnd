@@ -3,7 +3,6 @@ package cinema.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-
 public class PersonFull {
 	
 	private Integer idPerson;
@@ -11,6 +10,7 @@ public class PersonFull {
 	private LocalDate birthdate;
 	private List<String> nationalities;
 	private String biography;
+	private List<MovieLight> movies;
 	
 	public Integer getIdPerson() {
 		return idPerson;
@@ -41,6 +41,12 @@ public class PersonFull {
 	}
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+	public List<MovieLight> getMovies() {
+		return movies;
+	}
+	public void setMovies(List<MovieLight> movies) {
+		this.movies = movies;
 	}
 	
 
