@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cinema.dto.MovieLight;
-import cinema.dto.PersonFull;
 import cinema.dto.MovieFull;
 
 import cinema.persistence.entity.Audiance;
@@ -53,9 +52,12 @@ public class MovieService implements IMovieService {
 	@Override
 	public Optional<MovieFull> getMovieById(int idMovie) {
 		return movieRepository.findById(idMovie).map(m -> {
-			var mf = mapper.map(m, MovieFull.class);
 			var acts = actRepository.findByMovieIdMovie(idMovie);
-			mf.setActors(acts.stream().map(act -> mapper.map(act.getPerson(), PersonFull.class)).collect(Collectors.toList()));
+			var pActs = acts.stream()
+					.map(act -> act.toPersonAct())
+					.collect(Collectors.toCollection(HashSet::new));
+			var mf = mapper.map(m, MovieFull.class);
+			mf.setActors(pActs.stream().collect(Collectors.toList()));
 			return mf;
 		});
 	}

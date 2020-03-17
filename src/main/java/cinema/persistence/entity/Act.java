@@ -6,6 +6,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
+import cinema.dto.PersonAct;
+
 @Entity
 public class Act {
 	
@@ -72,6 +74,18 @@ public class Act {
 	@Override
 	public String toString() {
 		return "Act [id=" + id + ", movie=" + movie + ", person=" + person + ", role=" + role + "]";
+	}
+	
+	public PersonAct toPersonAct() {
+		PersonAct pact= new PersonAct();
+		pact.setIdPerson(person.getIdPerson());
+		pact.setName(person.getName());
+		pact.setBirthdate(person.getBirthdate());
+		pact.setNationalities(null);
+		pact.setBiography(person.getBiography());
+		pact.setMovies(null);
+		pact.setRole(role);
+		return pact;
 	}
 }
 

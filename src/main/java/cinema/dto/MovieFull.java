@@ -12,7 +12,7 @@ public class MovieFull extends MovieLight {
 	private Double rating; 
 	private String synopsis;
 	private Audiance audiance;
-	private List<PersonFull> actors;
+	private List<PersonAct> actors;
 	
 	public Integer getDuration() {
 		return duration;
@@ -44,10 +44,10 @@ public class MovieFull extends MovieLight {
 	public void setAudiance(Audiance audiance) {
 		this.audiance = audiance;
 	}
-	public List<PersonFull> getActors() {
+	public List<PersonAct> getActors() {
 		return actors;
 	}
-	public void setActors(List<PersonFull> actors) {
+	public void setActors(List<PersonAct> actors) {
 		this.actors = actors;
 	}
 	
